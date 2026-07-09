@@ -647,12 +647,29 @@ function askConfirm(title, message, confirmLabel, action) {
 
 const baseCategories = [
   { value: "beer", label: "ビール" }, { value: "sake", label: "日本酒" },
-  { value: "shochu", label: "焼酎" }, { value: "wine", label: "ワイン" },
-  { value: "whisky", label: "ウイスキー" }, { value: "soft", label: "ソフトドリンク" },
+  { value: "shochu", label: "焼酎" }, { value: "whisky", label: "ウイスキー" },
+  { value: "wine", label: "ワイン" }, { value: "soft", label: "ソフトドリンク" },
   { value: "other", label: "その他" }
 ];
 
 const storeKey = (name, store = activeStore) => `tana-${store}-${name}`;
+
+function orderedCategories() {
+  const priority = category => {
+    if (category.value === "beer") return 0;
+    if (category.value === "sake") return 1;
+    if (category.value === "shochu") return 2;
+    if (category.value === "whisky") return 3;
+    if (category.value === "wine") return 4;
+    if (category.value === "custom-liqueur" || category.label === "リキュール") return 5;
+    if (category.value === "soft") return 6;
+    if (category.value === "other") return 8;
+    return 7;
+  };
+  return [...baseCategories, ...customCategories]
+    .map((category, index) => ({ ...category, index }))
+    .sort((a, b) => priority(a) - priority(b) || a.index - b.index);
+}
 
 function loadStoreData(store) {
   activeStore = store;
@@ -670,7 +687,7 @@ function loadStoreData(store) {
 }
 
 function renderCategoryOptions() {
-  const categories = [...baseCategories, ...customCategories];
+  const categories = orderedCategories();
   ["product-category", "detail-product-category"].forEach(id => {
     const select = document.querySelector(`#${id}`); const selected = select.value;
     select.innerHTML = categories.map(c => `<option value="${c.value}">${c.label}</option>`).join("");
@@ -686,7 +703,7 @@ function renderCategoryOptions() {
 function renderInventoryFilters() {
   const container = document.querySelector(".filter-pills");
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
-  const categories = [...baseCategories, ...customCategories];
+  const categories = orderedCategories();
   if (currentFilter !== "all" && !categories.some(c => c.value === currentFilter)) currentFilter = "all";
   container.innerHTML = [
     `<button class="pill ${currentFilter === "all" ? "active" : ""}" data-filter="all">すべて <b>${activeProducts.length}</b></button>`,
@@ -856,7 +873,10 @@ function renderInventory() {
   renderInventoryFilters();
   const query = document.querySelector("#search-input").value.trim().toLowerCase();
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
-  const visible = activeProducts.filter(p => (currentFilter === "all" || p.category === currentFilter) && p.name.toLowerCase().includes(query));
+  const categoryOrder = new Map(orderedCategories().map((category, index) => [category.value, index]));
+  const visible = activeProducts
+    .filter(p => (currentFilter === "all" || p.category === currentFilter) && p.name.toLowerCase().includes(query))
+    .sort((a, b) => (categoryOrder.get(a.category) ?? 999) - (categoryOrder.get(b.category) ?? 999));
   document.querySelector("#inventory-list").innerHTML = visible.map(p => `
     <article class="inventory-item">
       <div class="product-thumb">${p.photo ? `<img src="${p.photo}" alt="${p.name}">` : '<span class="no-photo">写真<br>なし</span>'}</div>
@@ -940,7 +960,7 @@ function renderMaster() {
   const category = document.querySelector("#master-category").value;
   const status = document.querySelector("#master-status").value;
   const sort = document.querySelector("#master-sort").value;
-  const categoryOrder = [...baseCategories, ...customCategories].map(c => c.value);
+  const categoryOrder = orderedCategories().map(c => c.value);
   const visible = products.filter(p =>
     (category === "all" || p.category === category) &&
     (status === "all" || (status === "active" && !excludedProductIds.includes(p.id)) || (status === "unused" && excludedProductIds.includes(p.id))) &&
