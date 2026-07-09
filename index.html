@@ -425,9 +425,9 @@ body {
             <label class="primary-button camera-button">カメラを起動<input id="photo-input" type="file" accept="image/*" capture="environment"></label>
           </div>
           <form id="purchase-form" class="form-card">
-            <div class="form-title"><span>2</span><div><h2>商品情報を確認</h2><p>間違っていたら、その場で直せます</p></div></div>
+            <div class="form-title"><span>2</span><div><h2>商品情報を入力</h2></div></div>
             <div id="photo-preview" class="photo-preview hidden"></div>
-            <label>商品名<input id="product-name" required placeholder="写真を撮るか、商品名を入力"></label>
+            <label>商品名<input id="product-name" required placeholder="商品名を入力"></label>
             <button type="button" id="add-category-button" class="inline-add-button">＋ 新しい種類を追加</button>
             <div class="form-row"><label>種類<select id="product-category"><option value="beer">ビール</option><option value="sake">日本酒</option><option value="shochu">焼酎</option><option value="wine">ワイン</option><option value="whisky">ウイスキー</option><option value="soft">ソフトドリンク</option><option value="other">その他</option></select></label><label>仕入単価（税込）<div class="yen-input"><span>¥</span><input id="product-price" required inputmode="numeric" type="number" min="0" placeholder="0"></div></label></div>
             <p class="subtitle">数量は登録しません。棚卸のときに、残っている数量を入力します。</p>
