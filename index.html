@@ -693,6 +693,8 @@ const totalCount = product => {
   const sum = (Number(product.qty) || 0) + (Number(product.quantityMemo) || 0) + (Number(product.quantityMemo2) || 0);
   return Math.round((sum + Number.EPSILON) * 1000) / 1000;
 };
+const inventoryAmount = (product, unitPrice) =>
+  Math.floor(totalCount(product) * Number(unitPrice) + Number.EPSILON);
 
 function updateProductTotal(product) {
   const output = document.querySelector(`[data-total-id="${product.id}"]`);
@@ -890,7 +892,7 @@ function updateSummary() {
   document.querySelector("#total-count").textContent = activeProducts.length;
   document.querySelector("#progress-percent").textContent = `${percent}%`;
   document.querySelector("#progress-bar").style.width = `${percent}%`;
-  const total = activeProducts.reduce((sum, p) => sum + totalCount(p) * priceFor(p), 0);
+  const total = activeProducts.reduce((sum, p) => sum + inventoryAmount(p, priceFor(p)), 0);
   document.querySelector("#total-value").textContent = yen(total);
 }
 
@@ -1014,7 +1016,7 @@ function updateHQCompletionTimes() {
     const store = stores[index];
     const reportRows = getStoreReportRows(store);
     const filled = reportRows.filter(p => p.qty !== "" || p.quantityMemo !== "" || p.quantityMemo2 !== "").length;
-    const total = reportRows.reduce((sum, p) => sum + totalCount(p) * p.reportPrice, 0);
+    const total = reportRows.reduce((sum, p) => sum + inventoryAmount(p, p.reportPrice), 0);
     const percent = reportRows.length ? Math.round(filled / reportRows.length * 100) : 0;
     const time = getStoreCompletionTime(store);
     if (time) completedCount += 1;
@@ -1062,7 +1064,7 @@ function openStoreDetail(storeName) {
   const locationNames = locationNamesFor(storeName);
   const rows = getStoreReportRows(storeName);
   const rowPrice = p => p.reportPrice;
-  const total = rows.reduce((sum, p) => sum + totalCount(p) * rowPrice(p), 0);
+  const total = rows.reduce((sum, p) => sum + inventoryAmount(p, rowPrice(p)), 0);
   document.querySelector("#detail-store-name").textContent = storeName;
   document.querySelector("#detail-month").textContent = `${monthLabel(currentMonth)}分`;
   const completedAt = getStoreCompletionTime(storeName);
@@ -1073,7 +1075,7 @@ function openStoreDetail(storeName) {
   document.querySelector("#detail-body").innerHTML = rows.map(p => {
     const unitPrice = rowPrice(p);
     const totalQuantity = totalCount(p);
-    const amount = totalQuantity * unitPrice;
+    const amount = inventoryAmount(p, unitPrice);
     return `<tr><td><strong>${p.name}</strong>${p.quantityMemo || p.quantityMemo2 ? `<small class="detail-memo">${locationNames[1]}：${p.quantityMemo || 0} ／ ${locationNames[2]}：${p.quantityMemo2 || 0} ${p.unit}</small>` : ""}</td><td>${p.categoryLabel}</td><td>${p.qty === "" ? "未入力" : `${totalQuantity} ${p.unit}`}</td><td>${yen(unitPrice)}</td><td><strong>${yen(amount)}</strong></td></tr>`;
   }).join("");
   document.querySelector("#store-detail").classList.remove("hidden");
@@ -1086,11 +1088,11 @@ function downloadStoreDetail() {
   const csvRows = [["店舗", selectedStore], ["対象月", monthLabel(currentMonth)], [], ["商品名", "分類", locationNames[0], locationNames[1], locationNames[2], "単位", "仕入単価", "在庫金額"]];
   rows.forEach(p => {
     const unitPrice = p.reportPrice;
-    csvRows.push([p.name, p.categoryLabel, p.qty || 0, p.quantityMemo || "", p.quantityMemo2 || "", p.unit, unitPrice, totalCount(p) * unitPrice]);
+    csvRows.push([p.name, p.categoryLabel, p.qty || 0, p.quantityMemo || "", p.quantityMemo2 || "", p.unit, unitPrice, inventoryAmount(p, unitPrice)]);
   });
   csvRows.push(["合計", "", "", "", "", "", "", rows.reduce((sum, p) => {
     const unitPrice = p.reportPrice;
-    return sum + totalCount(p) * unitPrice;
+    return sum + inventoryAmount(p, unitPrice);
   }, 0)]);
   const csv = "\uFEFF" + csvRows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\r\n");
   const link = document.createElement("a");
