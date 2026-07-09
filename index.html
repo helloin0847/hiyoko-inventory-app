@@ -694,7 +694,7 @@ const totalCount = product => {
   return Math.round((sum + Number.EPSILON) * 1000) / 1000;
 };
 const inventoryAmount = (product, unitPrice) =>
-  Math.floor(totalCount(product) * Number(unitPrice) + Number.EPSILON);
+  Math.floor(totalCount(product) * Number(unitPrice) + 0.000001);
 
 function updateProductTotal(product) {
   const output = document.querySelector(`[data-total-id="${product.id}"]`);
