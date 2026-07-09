@@ -683,6 +683,24 @@ function renderCategoryOptions() {
   });
 }
 
+function renderInventoryFilters() {
+  const container = document.querySelector(".filter-pills");
+  const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
+  const categories = [...baseCategories, ...customCategories];
+  if (currentFilter !== "all" && !categories.some(c => c.value === currentFilter)) currentFilter = "all";
+  container.innerHTML = [
+    `<button class="pill ${currentFilter === "all" ? "active" : ""}" data-filter="all">すべて <b>${activeProducts.length}</b></button>`,
+    ...categories.map(category => {
+      const count = activeProducts.filter(p => p.category === category.value).length;
+      return `<button class="pill ${currentFilter === category.value ? "active" : ""}" data-filter="${category.value}">${category.label} <b>${count}</b></button>`;
+    })
+  ].join("");
+  container.querySelectorAll(".pill").forEach(pill => pill.addEventListener("click", () => {
+    currentFilter = pill.dataset.filter;
+    renderInventory();
+  }));
+}
+
 const monthLabel = month => {
   const [year, value] = month.split("-");
   return `${year}年 ${Number(value)}月`;
@@ -835,6 +853,7 @@ const save = () => {
 function renderInventory() {
   const isLocked = completedMonths.includes(currentMonth) && !editingCompletedMonth;
   const locationNames = locationNamesFor(activeStore);
+  renderInventoryFilters();
   const query = document.querySelector("#search-input").value.trim().toLowerCase();
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
   const visible = activeProducts.filter(p => (currentFilter === "all" || p.category === currentFilter) && p.name.toLowerCase().includes(query));
@@ -1352,11 +1371,6 @@ document.querySelector("#save-store-settings").addEventListener("click", async (
     toast("端末には保存しましたが、共有に失敗しました");
   }
 });
-document.querySelectorAll(".pill").forEach(pill => pill.addEventListener("click", () => {
-  document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
-  pill.classList.add("active"); currentFilter = pill.dataset.filter; renderInventory();
-}));
-
 const toast = message => {
   const el = document.querySelector("#toast"); el.textContent = message; el.classList.add("show");
   setTimeout(() => el.classList.remove("show"), 2300);
