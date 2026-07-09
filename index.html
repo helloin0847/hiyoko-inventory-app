@@ -1438,7 +1438,8 @@ document.querySelector("#purchase-form").addEventListener("submit", async event 
     id: productId, name: document.querySelector("#product-name").value,
     category: category.value, categoryLabel: category.options[category.selectedIndex].text,
     price: Number(document.querySelector("#product-price").value), unit: "本",
-    qty: "", icon: icons[category.value] || "🍾", photo: photoUrl, isNew: true
+    qty: "", icon: icons[category.value] || "🍾", photo: photoUrl, isNew: true,
+    registeredDate: new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Tokyo" })
   });
   save(); event.target.reset(); pendingPhoto = ""; document.querySelector("#photo-preview").classList.add("hidden");
   renderInventory(); toast("仕入商品を棚卸リストに追加しました"); showView("inventory");
