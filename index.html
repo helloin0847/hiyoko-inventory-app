@@ -27,6 +27,14 @@
 .add-inventory-card{overflow:hidden}.add-product-filters{display:block;margin-top:18px;width:100%;max-width:100%;min-width:0}.add-product-filters>*{min-width:0;max-width:100%}.add-product-filters .search{width:100%;max-width:100%;margin-bottom:10px}.add-product-filters .select-control{position:relative;display:block;width:100%;max-width:100%;min-width:0}.add-product-filters .select-control>span{display:block;margin-bottom:5px}.add-product-filters .select-control:after{content:"⌄";position:absolute;right:13px;bottom:10px;pointer-events:none;color:#60716c}.add-product-filters .select-control select{appearance:none;-webkit-appearance:none;display:block;box-sizing:border-box!important;inline-size:100%!important;width:100%!important;max-inline-size:100%!important;max-width:100%!important;min-inline-size:0!important;min-width:0!important;padding-right:38px!important}.add-product-search{width:100%}.already-added{font-size:11px;color:#3f7a69;background:#e8f2ee;padding:6px 10px;border-radius:14px}.master-price{display:inline-block;min-width:74px}.edit-price{border:0;background:transparent;color:#34715f;font-size:11px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .month-picker{display:grid;gap:4px}.month-picker span{font-size:10px;color:#6d7c78;font-weight:700}.month-picker input{height:43px;border:1px solid #d0dad7;background:#fff;border-radius:10px;padding:0 12px;color:#172b27;font-weight:600;cursor:pointer}.month-picker-left{width:172px;margin-bottom:12px}.month-picker-left input{border-color:#bad0c9;background:#f0f6f3;color:#17483d}.month-readable{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hq-month-picker{width:172px}.hq-month-picker input{border-color:#bad0c9;background:#f0f6f3;color:#17483d}
+.form-row.single{grid-template-columns:1fr}
+.status.price-missing{background:#ffe4c7;color:#a95716}
+.missing-price-row{background:#fffaf4}
+.hq-price-cell{display:grid;grid-template-columns:auto 110px;align-items:center;gap:5px;max-width:145px}
+.hq-price-cell span{color:var(--muted);font-weight:700}
+.hq-price-input{width:110px;border:1px solid #ccd8d4;border-radius:9px;padding:8px 9px;text-align:right;font-weight:700;background:#fff;outline:none}
+.hq-price-input:focus{border-color:#528675;box-shadow:0 0 0 3px #dcece6}
+.hq-price-cell small{grid-column:1 / -1;color:#b85c18;font-size:10px;font-weight:700}
 .store-row{cursor:pointer;transition:.15s}.store-row:hover,.store-row:focus{background:#f0f6f3;outline:none}.store-row td:first-child strong{color:#17634f;text-decoration:underline;text-underline-offset:3px}.detail-open{overflow:hidden}.detail-overlay{position:fixed;z-index:25;inset:0 0 0 240px;background:#f6f8f7;overflow:auto}.detail-sheet{max-width:1040px;margin:auto;padding:34px 46px 70px}.detail-top,.detail-heading,.detail-meta{display:flex;align-items:center;justify-content:space-between}.detail-top{margin-bottom:34px}.detail-actions{display:flex;gap:10px}.back-button{border:0;background:transparent;color:#37695b;font-weight:700;cursor:pointer;padding:10px 0}.detail-heading{padding-bottom:25px;border-bottom:1px solid #dfe7e4}.detail-total{display:grid;text-align:right}.detail-total span{font-size:12px;color:#6d7c78}.detail-total strong{font-size:32px;color:#17483d}.detail-meta{justify-content:flex-start;gap:30px;padding:14px 0 20px;color:#6d7c78;font-size:12px}.detail-table tfoot td{font-weight:700;background:#f2f6f4;border-top:2px solid #cddbd6}.detail-table th:nth-child(n+3),.detail-table td:nth-child(n+3){text-align:right}.print-note{display:none;color:#6d7c78;font-size:10px;text-align:right;margin-top:18px}
 :root{--ink:#172b27;--muted:#6d7c78;--green:#17483d;--mint:#e8f2ee;--line:#dfe7e4;--bg:#f6f8f7;--white:#fff;--orange:#c9712c}
 *{box-sizing:border-box}body{margin:0;font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}.app-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.sidebar{position:fixed;width:240px;height:100vh;background:#123b33;color:white;padding:30px 20px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:12px;font:700 23px "Plus Jakarta Sans";padding:0 10px 36px}.brand-mark{display:grid;place-items:center;width:34px;height:34px;background:#e4b86a;color:#123b33;border-radius:10px}nav{display:grid;gap:8px}.nav-item{border:0;background:transparent;color:#bbcec8;text-align:left;padding:14px 15px;border-radius:10px;cursor:pointer;font-weight:600}.nav-item span{display:inline-block;width:28px;font-size:18px}.nav-item.active,.nav-item:hover{color:white;background:#28584d}.store-card{margin-top:auto;display:flex;align-items:center;gap:10px;border-top:1px solid #386057;padding:22px 4px 0}.store-card div{flex:1;display:grid}.store-card small{color:#a9c1bb}.store-avatar,.avatar{display:grid;place-items:center;background:#e8d7b5;color:#633d1f;border:0;border-radius:50%;width:38px;height:38px;font-weight:700}main{grid-column:2}.topbar{height:70px;border-bottom:1px solid var(--line);background:white;display:flex;align-items:center;justify-content:flex-end;padding:0 42px}.top-actions{display:flex;gap:15px;align-items:center}.sync{font-size:12px;color:var(--muted)}.sync i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#55a07e;margin-right:6px}.icon-button{border:1px solid var(--line);background:white;border-radius:50%;width:36px;height:36px}.mobile-menu,.mobile-brand{display:none}.view{display:none;max-width:1120px;margin:auto;padding:42px 46px 125px}.view.active{display:block}.page-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:#3f7a69;font-weight:700;font-size:12px;margin:0 0 7px}h1{font-size:30px;margin:0 0 8px;letter-spacing:-.04em}h2{margin:0;font-size:19px}.subtitle{margin:0;color:var(--muted);font-size:14px}.outline-button{border:1px solid var(--line);background:white;padding:11px 16px;border-radius:10px;color:var(--ink);cursor:pointer}.primary-button{border:0;background:var(--green);color:#fff;padding:13px 22px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 4px 10px #17483d26}.primary-button:hover{background:#0d382f}.progress-card{background:white;border:1px solid var(--line);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:22px}.progress-copy{display:flex;align-items:center;gap:12px;min-width:230px}.progress-copy div:last-child{display:grid}.progress-copy small{color:var(--muted);font-size:11px;margin-top:3px}.progress-icon{display:grid;place-items:center;border-radius:50%;width:38px;height:38px;background:var(--mint);color:#337560;font-weight:700}.progress-track{height:7px;background:#e8eeec;border-radius:8px;flex:1;overflow:hidden}.progress-track span{display:block;height:100%;width:25%;background:#4b8a76;border-radius:8px;transition:.3s}.toolbar{display:flex;align-items:center;justify-content:space-between;margin:25px 0 14px;gap:15px}.search{display:flex;align-items:center;background:white;border:1px solid var(--line);border-radius:10px;padding:0 13px;width:230px}.search input{border:0;outline:0;padding:11px;width:100%;background:transparent}.filter-pills{display:flex;gap:7px}.pill{border:1px solid var(--line);background:white;padding:8px 13px;border-radius:20px;font-size:12px;color:var(--muted);cursor:pointer}.pill.active{background:var(--ink);color:white}.pill b{background:#ffffff2c;padding:1px 6px;border-radius:10px}.inventory-list{display:grid;gap:9px}.inventory-item{display:grid;grid-template-columns:52px 1fr 140px;align-items:center;gap:14px;background:white;border:1px solid var(--line);border-radius:12px;padding:12px 16px;transition:.2s}.inventory-item:focus-within{border-color:#528675;box-shadow:0 0 0 3px #dcece6}.product-thumb{width:48px;height:48px;border-radius:9px;display:grid;place-items:center;font-size:25px;background:#f0f3ed}.product-info strong{display:block;font-size:14px}.product-info span{font-size:11px;color:var(--muted)}.new-badge{font-style:normal;background:#fff0d8;color:#ad681d;padding:2px 6px;border-radius:5px;margin-left:7px}.quantity-wrap{display:flex;align-items:center;gap:9px}.quantity-wrap input{width:92px;border:1px solid #ccd8d4;border-radius:9px;padding:10px 9px;text-align:right;font-size:17px;font-weight:700;outline:none}.quantity-wrap span{font-size:13px;color:var(--muted)}.bottom-action{position:fixed;z-index:5;bottom:0;left:240px;right:0;background:#ffffffef;backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px max(46px,calc((100vw - 240px - 1028px)/2));display:flex;align-items:center;justify-content:flex-end;gap:35px}.bottom-action div{display:grid;text-align:right}.bottom-action div span{font-size:11px;color:var(--muted)}.bottom-action div strong{font-size:19px}.bottom-action button span{padding-left:20px}.purchase-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px}.camera-card,.form-card,.table-card,.summary-card{background:white;border:1px solid var(--line);border-radius:14px}.camera-card{text-align:center;padding:44px 30px;height:max-content}.camera-illustration{width:120px;height:120px;border-radius:50%;background:var(--mint);display:grid;place-items:center;margin:0 auto 23px}.camera-illustration span{font-size:46px;color:#397764}.camera-card p,.form-title p{font-size:12px;color:var(--muted);margin:7px 0 24px}.camera-button{display:inline-block}.camera-button input{display:none}.form-card{padding:27px}.form-title{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:21px}.form-title>span{display:grid;place-items:center;width:34px;height:34px;background:var(--green);color:white;border-radius:50%;font-weight:700}.form-title p{margin:3px 0 0}.form-card label{display:grid;gap:7px;font-size:12px;font-weight:700;margin-bottom:17px}.form-card input,.form-card select{border:1px solid #ccd8d4;border-radius:9px;padding:12px;outline:none;background:white}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.yen-input{position:relative}.yen-input span{position:absolute;left:12px;top:11px;color:var(--muted)}.yen-input input{width:100%;padding-left:30px}.wide{width:100%}.photo-preview{height:110px;background-position:center;background-size:cover;border-radius:10px;margin-bottom:15px}.hidden{display:none!important}.table-card{overflow:hidden}.table-card table{width:100%;border-collapse:collapse;text-align:left}.table-card th{font-size:11px;color:var(--muted);background:#fafbfb;padding:14px 20px}.table-card td{padding:17px 20px;border-top:1px solid var(--line);font-size:13px}.status{padding:5px 10px;border-radius:15px;font-size:11px}.status.done{background:#dff0e9;color:#2a735d}.status.editing{background:#fff0dc;color:#ad681d}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.summary-card{padding:21px;display:grid;gap:6px}.summary-card>span{font-size:12px;color:var(--muted)}.summary-card strong{font-size:25px}.summary-card strong small{font-size:12px;color:var(--muted)}.summary-card i{font-size:10px;color:var(--muted);font-style:normal}.summary-card i.green{color:#3b806a}.summary-card i.orange{color:var(--orange)}.mini-progress{width:80px;height:5px;background:#e3e9e7;border-radius:4px;display:inline-block;margin-right:8px}.mini-progress span{display:block;height:100%;background:#4b8a76;border-radius:4px}.toast{position:fixed;z-index:20;top:20px;left:50%;transform:translate(-50%,-100px);background:#173f36;color:white;padding:13px 24px;border-radius:9px;box-shadow:0 8px 25px #0003;transition:.3s}.toast.show{transform:translate(-50%,0)}.modal{position:fixed;z-index:30;inset:0;background:#102b267d;display:grid;place-items:center}.modal-card{background:white;border-radius:18px;padding:38px;text-align:center;width:min(90%,390px)}.modal-card p{color:var(--muted);font-size:13px;line-height:1.8}.success-mark{display:grid;place-items:center;margin:0 auto 18px;width:60px;height:60px;border-radius:50%;background:#dcefe8;color:#2f8066;font-size:28px}
@@ -431,8 +439,8 @@ body {
             <div id="photo-preview" class="photo-preview hidden"></div>
             <label>商品名<input id="product-name" required placeholder="商品名を入力"><small class="field-note">※なるべく納品伝票と同じように入力してください</small></label>
             <button type="button" id="add-category-button" class="inline-add-button">＋ 新しい種類を追加</button>
-            <div class="form-row"><label>種類<select id="product-category"><option value="beer">ビール</option><option value="sake">日本酒</option><option value="shochu">焼酎</option><option value="wine">ワイン</option><option value="whisky">ウイスキー</option><option value="soft">ソフトドリンク</option><option value="other">その他</option></select></label><label>仕入単価（税込）<div class="yen-input"><span>¥</span><input id="product-price" required inputmode="numeric" type="number" min="0" placeholder="0"></div></label></div>
-            <p class="subtitle">数量は登録しません。棚卸のときに、残っている数量を入力します。</p>
+            <div class="form-row single"><label>種類<select id="product-category"><option value="beer">ビール</option><option value="sake">日本酒</option><option value="shochu">焼酎</option><option value="wine">ワイン</option><option value="whisky">ウイスキー</option><option value="soft">ソフトドリンク</option><option value="other">その他</option></select></label><input id="product-price" type="hidden" value="0"></div>
+            <p class="subtitle">数量と単価は登録しません。棚卸では残っている数量だけ入力し、単価は本部で入力します。</p>
             <button class="primary-button wide" type="submit">この内容で登録する</button>
           </form>
         </div>
@@ -453,7 +461,7 @@ body {
       <section id="hq" class="view">
         <div class="page-head"><div><p class="eyebrow">本部ダッシュボード</p><h1>店舗の棚卸状況</h1><p class="subtitle">全店舗の進捗と在庫金額を確認できます。</p></div><div class="page-head-actions"><button id="refresh-hq" class="outline-button">↻ 最新の情報に更新</button><label class="month-picker hq-month-picker"><span>確認する年月</span><input id="hq-month" type="month" value="2026-07" aria-label="確認する年月を選択"></label></div></div>
         <div class="summary-grid"><div class="summary-card"><span>完了店舗</span><strong>2 <small>/ 3店</small></strong><i class="green">前月比 +1</i></div><div class="summary-card"><span>全店の在庫金額</span><strong>¥228,800</strong><i id="hq-summary-month">7月時点</i></div><div class="summary-card"><span>未完了店舗</span><strong>1 <small>店</small></strong><i class="orange">要確認</i></div></div>
-        <div class="table-card"><table><thead><tr><th>店舗</th><th>進捗</th><th>在庫金額</th><th>最終更新</th><th>状態</th></tr></thead><tbody><tr><td><strong>本店</strong></td><td><div class="mini-progress"><span style="width:25%"></span></div> 2 / 8</td><td>¥3,580</td><td>たった今</td><td><span class="status editing">入力中</span></td></tr><tr><td><strong>east</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 42 / 42</td><td>¥128,420</td><td>7月1日 21:04</td><td><span class="status done">完了</span></td></tr><tr><td><strong>ASAHI</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 38 / 38</td><td>¥96,800</td><td>7月1日 18:32</td><td><span class="status done">完了</span></td></tr></tbody></table></div>
+        <div class="table-card"><table><thead><tr><th>店舗</th><th>進捗</th><th>在庫金額</th><th>単価未入力</th><th>最終更新</th><th>状態</th></tr></thead><tbody><tr><td><strong>本店</strong></td><td><div class="mini-progress"><span style="width:25%"></span></div> 2 / 8</td><td>¥3,580</td><td>0件</td><td>たった今</td><td><span class="status editing">入力中</span></td></tr><tr><td><strong>east</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 42 / 42</td><td>¥128,420</td><td>0件</td><td>7月1日 21:04</td><td><span class="status done">完了</span></td></tr><tr><td><strong>ASAHI</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 38 / 38</td><td>¥96,800</td><td>0件</td><td>7月1日 18:32</td><td><span class="status done">完了</span></td></tr></tbody></table></div>
       </section>
 
       <section id="settings" class="view">
@@ -731,6 +739,7 @@ const totalCount = product => {
 };
 const inventoryAmount = (product, unitPrice) =>
   Math.floor(totalCount(product) * Number(unitPrice) + 0.000001);
+const missingPriceCount = rows => rows.filter(p => Number(p.reportPrice || 0) <= 0).length;
 
 function updateProductTotal(product) {
   const output = document.querySelector(`[data-total-id="${product.id}"]`);
@@ -826,6 +835,37 @@ function cacheStorePayload(store, payload) {
   });
 }
 
+function readStorePayload(store) {
+  return {
+    products: JSON.parse(localStorage.getItem(storeKey("products", store)) || "null") || seedProducts.map(p => ({ ...p })),
+    currentMonth: localStorage.getItem(storeKey("current-month", store)) || todayMonth,
+    quantitySnapshots: JSON.parse(localStorage.getItem(storeKey("month-quantities", store)) || "{}"),
+    memoSnapshots: JSON.parse(localStorage.getItem(storeKey("month-memos", store)) || "{}"),
+    memo2Snapshots: JSON.parse(localStorage.getItem(storeKey("month-memos-2", store)) || "{}"),
+    exclusionSnapshots: JSON.parse(localStorage.getItem(storeKey("month-exclusions", store)) || "{}"),
+    priceSnapshots: JSON.parse(localStorage.getItem(storeKey("month-prices", store)) || "{}"),
+    completedMonths: JSON.parse(localStorage.getItem(storeKey("completed-months", store)) || "[]"),
+    completionTimestamps: JSON.parse(localStorage.getItem(storeKey("completion-times", store)) || "{}"),
+    customCategories: JSON.parse(localStorage.getItem(storeKey("custom-categories", store)) || "[]")
+  };
+}
+
+async function updateStoreUnitPrice(store, productId, price) {
+  const payload = readStorePayload(store);
+  const product = payload.products.find(p => p.id === productId);
+  if (!product) return;
+  product.price = price;
+  payload.priceSnapshots[currentMonth] = { ...(payload.priceSnapshots[currentMonth] || {}), [productId]: price };
+  cacheStorePayload(store, payload);
+  try {
+    await window.hiyokoCloud?.saveStore(store, payload);
+    toast("単価を保存しました");
+  } catch (error) {
+    console.error(error);
+    toast("端末には保存しましたが、共有に失敗しました");
+  }
+}
+
 function setSyncStatus(text, syncing = false) {
   const element = document.querySelector(".sync");
   if (!element) return;
@@ -880,7 +920,7 @@ function renderInventory() {
   document.querySelector("#inventory-list").innerHTML = visible.map(p => `
     <article class="inventory-item">
       <div class="product-thumb">${p.photo ? `<img src="${p.photo}" alt="${p.name}">` : '<span class="no-photo">写真<br>なし</span>'}</div>
-      <div class="product-info"><strong>${p.name}${p.isNew ? '<i class="new-badge">今月追加</i>' : ""}</strong><span class="category-badge ${p.category}">${p.categoryLabel}</span><span class="price-copy">${yen(priceFor(p))} / ${p.unit}</span></div>
+      <div class="product-info"><strong>${p.name}${p.isNew ? '<i class="new-badge">今月追加</i>' : ""}</strong><span class="category-badge ${p.category}">${p.categoryLabel}</span><span class="price-copy">${Number(priceFor(p) || 0) <= 0 ? "単価は本部入力" : `${yen(priceFor(p))} / ${p.unit}`}</span></div>
       <div class="inventory-controls"><div class="count-entry"><label class="count-box"><span>${locationNames[0]}</span><input class="count-input ${isLocked ? "locked" : ""}" aria-label="${p.name}の${locationNames[0]}数量" inputmode="decimal" type="number" min="0" step="1" placeholder="0" value="${p.qty}" data-id="${p.id}" ${isLocked ? 'readonly data-locked="true"' : ""}></label><label class="count-box"><span>${locationNames[1]}</span><input class="count-input quantity-memo" aria-label="${p.name}の${locationNames[1]}数量" inputmode="decimal" type="number" min="0" step="1" placeholder="0" value="${p.quantityMemo || ""}" data-memo-id="${p.id}" ${isLocked ? 'readonly data-locked="true"' : ""}></label><label class="count-box"><span>${locationNames[2]}</span><input class="count-input quantity-memo" aria-label="${p.name}の${locationNames[2]}数量" inputmode="decimal" type="number" min="0" step="1" placeholder="0" value="${p.quantityMemo2 || ""}" data-memo2-id="${p.id}" ${isLocked ? 'readonly data-locked="true"' : ""}></label><div class="count-total"><span>合計</span><output data-total-id="${p.id}">${totalCount(p)} ${p.unit}</output></div></div><button class="remove-product" data-remove-id="${p.id}" aria-label="${p.name}を今月の一覧から外す" title="今月の一覧から外す" ${isLocked ? 'data-locked="true"' : ""}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg></button></div>
     </article>`).join("") || '<p class="subtitle">該当する商品がありません。</p>';
   document.querySelectorAll('.count-input[data-id]').forEach(input => input.addEventListener("input", e => {
@@ -1058,14 +1098,16 @@ function updateHQCompletionTimes() {
     const reportRows = getStoreReportRows(store);
     const filled = reportRows.filter(p => p.qty !== "" || p.quantityMemo !== "" || p.quantityMemo2 !== "").length;
     const total = reportRows.reduce((sum, p) => sum + inventoryAmount(p, p.reportPrice), 0);
+    const noPrice = missingPriceCount(reportRows);
     const percent = reportRows.length ? Math.round(filled / reportRows.length * 100) : 0;
     const time = getStoreCompletionTime(store);
     if (time) completedCount += 1;
     grandTotal += total;
     row.children[1].innerHTML = `<div class="mini-progress"><span style="width:${percent}%"></span></div> ${filled} / ${reportRows.length}`;
     row.children[2].textContent = yen(total);
-    row.children[3].textContent = formatDateTime(time);
-    row.children[4].innerHTML = time
+    row.children[3].innerHTML = noPrice ? `<span class="status price-missing">${noPrice}件</span>` : '<span class="status done">0件</span>';
+    row.children[4].textContent = formatDateTime(time);
+    row.children[5].innerHTML = time
       ? '<span class="status done">完了</span>'
       : '<span class="status editing">未送信</span>';
   });
@@ -1117,8 +1159,15 @@ function openStoreDetail(storeName) {
     const unitPrice = rowPrice(p);
     const totalQuantity = totalCount(p);
     const amount = inventoryAmount(p, unitPrice);
-    return `<tr><td><strong>${p.name}</strong>${p.quantityMemo || p.quantityMemo2 ? `<small class="detail-memo">${locationNames[1]}：${p.quantityMemo || 0} ／ ${locationNames[2]}：${p.quantityMemo2 || 0} ${p.unit}</small>` : ""}</td><td>${p.categoryLabel}</td><td>${p.qty === "" ? "未入力" : `${totalQuantity} ${p.unit}`}</td><td>${yen(unitPrice)}</td><td><strong>${yen(amount)}</strong></td></tr>`;
+    const priceCell = `<div class="hq-price-cell"><span>¥</span><input class="hq-price-input" data-hq-price-id="${p.id}" inputmode="numeric" type="number" min="0" value="${unitPrice || 0}" aria-label="${p.name}の仕入単価">${Number(unitPrice || 0) <= 0 ? '<small>単価未入力</small>' : ""}</div>`;
+    return `<tr class="${Number(unitPrice || 0) <= 0 ? "missing-price-row" : ""}"><td><strong>${p.name}</strong>${p.quantityMemo || p.quantityMemo2 ? `<small class="detail-memo">${locationNames[1]}：${p.quantityMemo || 0} ／ ${locationNames[2]}：${p.quantityMemo2 || 0} ${p.unit}</small>` : ""}</td><td>${p.categoryLabel}</td><td>${p.qty === "" ? "未入力" : `${totalQuantity} ${p.unit}`}</td><td>${priceCell}</td><td><strong>${yen(amount)}</strong></td></tr>`;
   }).join("");
+  document.querySelectorAll("[data-hq-price-id]").forEach(input => input.addEventListener("change", async event => {
+    const price = Number(event.target.value || 0);
+    await updateStoreUnitPrice(selectedStore, Number(event.target.dataset.hqPriceId), price);
+    updateHQCompletionTimes();
+    openStoreDetail(selectedStore);
+  }));
   document.querySelector("#store-detail").classList.remove("hidden");
   document.body.classList.add("detail-open");
 }
