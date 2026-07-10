@@ -638,6 +638,7 @@ let completedMonths = [];
 let completionTimestamps = {};
 let excludedProductIds = [];
 let editingCompletedMonth = false;
+let unfilledReviewAcknowledged = false;
 let customCategories = [];
 let pendingLoginStore = "";
 let confirmAction = null;
@@ -754,8 +755,10 @@ function renderInventoryFilters() {
   const container = document.querySelector(".filter-pills");
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
   const categories = orderedCategories();
-  if (currentFilter !== "all" && !categories.some(c => c.value === currentFilter)) currentFilter = "all";
+  if (!["all", "unfilled"].includes(currentFilter) && !categories.some(c => c.value === currentFilter)) currentFilter = "all";
+  const unfilledCount = activeProducts.filter(p => !isInventoryFilled(p)).length;
   container.innerHTML = [
+    `<button class="pill ${currentFilter === "unfilled" ? "active" : ""}" data-filter="unfilled">\u672a\u5165\u529b <b>${unfilledCount}</b></button>`,
     `<button class="pill ${currentFilter === "all" ? "active" : ""}" data-filter="all">すべて <b>${activeProducts.length}</b></button>`,
     ...categories.map(category => {
       const count = activeProducts.filter(p => p.category === category.value).length;
@@ -779,6 +782,8 @@ const totalCount = product => {
   const sum = (Number(product.qty) || 0) + (Number(product.quantityMemo) || 0) + (Number(product.quantityMemo2) || 0);
   return Math.round((sum + Number.EPSILON) * 1000) / 1000;
 };
+const isInventoryFilled = product => product.qty !== "" || product.quantityMemo !== "" || product.quantityMemo2 !== "";
+const unfilledInventoryProducts = () => products.filter(p => !excludedProductIds.includes(p.id) && !isInventoryFilled(p));
 const inventoryAmount = (product, unitPrice) =>
   Math.floor(totalCount(product) * Number(unitPrice) + 0.000001);
 const missingPriceCount = rows => rows.filter(p => Number(p.reportPrice || 0) <= 0).length;
@@ -805,6 +810,7 @@ function switchMonth(month) {
   saveMonthState();
   currentMonth = month;
   editingCompletedMonth = false;
+  unfilledReviewAcknowledged = false;
   localStorage.setItem(storeKey("current-month"), currentMonth);
   const snapshot = quantitySnapshots[currentMonth];
   const memoSnapshot = memoSnapshots[currentMonth];
@@ -999,7 +1005,7 @@ function renderInventory() {
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
   const categoryOrder = new Map(orderedCategories().map((category, index) => [category.value, index]));
   const visible = activeProducts
-    .filter(p => (currentFilter === "all" || p.category === currentFilter) && p.name.toLowerCase().includes(query))
+    .filter(p => (currentFilter === "all" || (currentFilter === "unfilled" ? !isInventoryFilled(p) : p.category === currentFilter)) && p.name.toLowerCase().includes(query))
     .sort((a, b) => (categoryOrder.get(a.category) ?? 999) - (categoryOrder.get(b.category) ?? 999));
   document.querySelector("#inventory-list").innerHTML = visible.map(p => `
     <article class="inventory-item">
@@ -1050,7 +1056,7 @@ function updateCompletionButton() {
 
 function updateSummary() {
   const activeProducts = products.filter(p => !excludedProductIds.includes(p.id));
-  const filled = activeProducts.filter(p => p.qty !== "").length;
+  const filled = activeProducts.filter(isInventoryFilled).length;
   const percent = activeProducts.length ? Math.round(filled / activeProducts.length * 100) : 0;
   document.querySelector("#filled-count").textContent = filled;
   document.querySelector("#total-count").textContent = activeProducts.length;
@@ -1649,7 +1655,7 @@ document.querySelector("#complete-button").addEventListener("click", () => {
     renderInventory();
     return toast("棚卸内容を修正できます");
   }
-  const unfilled = products.filter(p => !excludedProductIds.includes(p.id) && p.qty === "");
+  const unfilled = unfilledInventoryProducts();
   const finishInventory = async () => {
     if (!completedMonths.includes(currentMonth)) {
       priceSnapshots[currentMonth] = Object.fromEntries(products.map(p => [p.id, p.price]));
@@ -1658,6 +1664,7 @@ document.querySelector("#complete-button").addEventListener("click", () => {
       localStorage.setItem(storeKey("completed-months"), JSON.stringify(completedMonths));
     }
     editingCompletedMonth = false;
+    unfilledReviewAcknowledged = false;
     completionTimestamps[currentMonth] = new Date().toISOString();
     localStorage.setItem(storeKey("completion-times"), JSON.stringify(completionTimestamps));
     unfilled.forEach(p => p.qty = "0"); save(); saveMonthState(); renderInventory();
@@ -1668,6 +1675,16 @@ document.querySelector("#complete-button").addEventListener("click", () => {
       : `端末には保存しましたが、本部へまだ共有できていません。<br>通信を確認して、もう一度「修正内容を送信する」を押してください。`;
     document.querySelector("#modal").classList.remove("hidden");
   };
+  if (unfilled.length && !unfilledReviewAcknowledged) {
+    askConfirm("\u672a\u5165\u529b\u306e\u5546\u54c1\u304c\u3042\u308a\u307e\u3059", `\u672a\u5165\u529b\u306e\u5546\u54c1\u304c${unfilled.length}\u54c1\u3042\u308a\u307e\u3059\u3002\u78ba\u8a8d\u3057\u307e\u3059\u304b\uff1f`, "\u672a\u5165\u529b\u3060\u3051\u898b\u308b", () => {
+      currentFilter = "unfilled";
+      unfilledReviewAcknowledged = true;
+      renderInventory();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      toast("\u672a\u5165\u529b\u306e\u5546\u54c1\u3060\u3051\u8868\u793a\u3057\u307e\u3057\u305f");
+    });
+    return;
+  }
   if (unfilled.length) {
     askConfirm("未入力の商品があります", `未入力の商品が${unfilled.length}品あります。数量を0として棚卸を送信しますか？`, "0として送信する", finishInventory);
   } else {
