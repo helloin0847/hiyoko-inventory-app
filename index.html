@@ -1338,6 +1338,7 @@ function downloadStoreDetail() {
 
 function showView(id) {
   if (activeRole === "store" && (id === "hq" || id === "hq-master" || id === "settings")) return;
+  closeStoreDetail();
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === id));
   document.querySelector(".sidebar").classList.remove("open");
@@ -1345,6 +1346,11 @@ function showView(id) {
   if (id === "hq-master") renderHqMaster();
   if (id === "settings") renderStoreSettings();
   window.scrollTo(0, 0);
+}
+
+function closeStoreDetail() {
+  document.querySelector("#store-detail")?.classList.add("hidden");
+  document.body.classList.remove("detail-open");
 }
 
 const SESSION_LIMIT = 8 * 60 * 60 * 1000;
@@ -1471,10 +1477,7 @@ document.querySelectorAll("#hq tbody tr").forEach((row, index) => {
   row.addEventListener("click", () => openStoreDetail(storeNames[index]));
   row.addEventListener("keydown", event => { if (event.key === "Enter") openStoreDetail(storeNames[index]); });
 });
-document.querySelector("#close-detail").addEventListener("click", () => {
-  document.querySelector("#store-detail").classList.add("hidden");
-  document.body.classList.remove("detail-open");
-});
+document.querySelector("#close-detail").addEventListener("click", closeStoreDetail);
 document.querySelector("#download-detail").addEventListener("click", downloadStoreDetail);
 document.querySelector("#print-detail").addEventListener("click", () => window.print());
 document.querySelector("#refresh-hq").addEventListener("click", refreshHeadOfficeData);
