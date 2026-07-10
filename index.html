@@ -35,6 +35,9 @@
 .hq-price-input{width:110px;border:1px solid #ccd8d4;border-radius:9px;padding:8px 9px;text-align:right;font-weight:700;background:#fff;outline:none}
 .hq-price-input:focus{border-color:#528675;box-shadow:0 0 0 3px #dcece6}
 .hq-price-cell small{grid-column:1 / -1;color:#b85c18;font-size:10px;font-weight:700}
+.hq-master-toolbar{flex-wrap:wrap}
+#hq-master .table-card table{min-width:760px}
+#hq-master .status.price-missing{display:inline-block}
 .store-row{cursor:pointer;transition:.15s}.store-row:hover,.store-row:focus{background:#f0f6f3;outline:none}.store-row td:first-child strong{color:#17634f;text-decoration:underline;text-underline-offset:3px}.detail-open{overflow:hidden}.detail-overlay{position:fixed;z-index:25;inset:0 0 0 240px;background:#f6f8f7;overflow:auto}.detail-sheet{max-width:1040px;margin:auto;padding:34px 46px 70px}.detail-top,.detail-heading,.detail-meta{display:flex;align-items:center;justify-content:space-between}.detail-top{margin-bottom:34px}.detail-actions{display:flex;gap:10px}.back-button{border:0;background:transparent;color:#37695b;font-weight:700;cursor:pointer;padding:10px 0}.detail-heading{padding-bottom:25px;border-bottom:1px solid #dfe7e4}.detail-total{display:grid;text-align:right}.detail-total span{font-size:12px;color:#6d7c78}.detail-total strong{font-size:32px;color:#17483d}.detail-meta{justify-content:flex-start;gap:30px;padding:14px 0 20px;color:#6d7c78;font-size:12px}.detail-table tfoot td{font-weight:700;background:#f2f6f4;border-top:2px solid #cddbd6}.detail-table th:nth-child(n+3),.detail-table td:nth-child(n+3){text-align:right}.print-note{display:none;color:#6d7c78;font-size:10px;text-align:right;margin-top:18px}
 :root{--ink:#172b27;--muted:#6d7c78;--green:#17483d;--mint:#e8f2ee;--line:#dfe7e4;--bg:#f6f8f7;--white:#fff;--orange:#c9712c}
 *{box-sizing:border-box}body{margin:0;font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}.app-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.sidebar{position:fixed;width:240px;height:100vh;background:#123b33;color:white;padding:30px 20px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:12px;font:700 23px "Plus Jakarta Sans";padding:0 10px 36px}.brand-mark{display:grid;place-items:center;width:34px;height:34px;background:#e4b86a;color:#123b33;border-radius:10px}nav{display:grid;gap:8px}.nav-item{border:0;background:transparent;color:#bbcec8;text-align:left;padding:14px 15px;border-radius:10px;cursor:pointer;font-weight:600}.nav-item span{display:inline-block;width:28px;font-size:18px}.nav-item.active,.nav-item:hover{color:white;background:#28584d}.store-card{margin-top:auto;display:flex;align-items:center;gap:10px;border-top:1px solid #386057;padding:22px 4px 0}.store-card div{flex:1;display:grid}.store-card small{color:#a9c1bb}.store-avatar,.avatar{display:grid;place-items:center;background:#e8d7b5;color:#633d1f;border:0;border-radius:50%;width:38px;height:38px;font-weight:700}main{grid-column:2}.topbar{height:70px;border-bottom:1px solid var(--line);background:white;display:flex;align-items:center;justify-content:flex-end;padding:0 42px}.top-actions{display:flex;gap:15px;align-items:center}.sync{font-size:12px;color:var(--muted)}.sync i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#55a07e;margin-right:6px}.icon-button{border:1px solid var(--line);background:white;border-radius:50%;width:36px;height:36px}.mobile-menu,.mobile-brand{display:none}.view{display:none;max-width:1120px;margin:auto;padding:42px 46px 125px}.view.active{display:block}.page-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:#3f7a69;font-weight:700;font-size:12px;margin:0 0 7px}h1{font-size:30px;margin:0 0 8px;letter-spacing:-.04em}h2{margin:0;font-size:19px}.subtitle{margin:0;color:var(--muted);font-size:14px}.outline-button{border:1px solid var(--line);background:white;padding:11px 16px;border-radius:10px;color:var(--ink);cursor:pointer}.primary-button{border:0;background:var(--green);color:#fff;padding:13px 22px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 4px 10px #17483d26}.primary-button:hover{background:#0d382f}.progress-card{background:white;border:1px solid var(--line);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:22px}.progress-copy{display:flex;align-items:center;gap:12px;min-width:230px}.progress-copy div:last-child{display:grid}.progress-copy small{color:var(--muted);font-size:11px;margin-top:3px}.progress-icon{display:grid;place-items:center;border-radius:50%;width:38px;height:38px;background:var(--mint);color:#337560;font-weight:700}.progress-track{height:7px;background:#e8eeec;border-radius:8px;flex:1;overflow:hidden}.progress-track span{display:block;height:100%;width:25%;background:#4b8a76;border-radius:8px;transition:.3s}.toolbar{display:flex;align-items:center;justify-content:space-between;margin:25px 0 14px;gap:15px}.search{display:flex;align-items:center;background:white;border:1px solid var(--line);border-radius:10px;padding:0 13px;width:230px}.search input{border:0;outline:0;padding:11px;width:100%;background:transparent}.filter-pills{display:flex;gap:7px}.pill{border:1px solid var(--line);background:white;padding:8px 13px;border-radius:20px;font-size:12px;color:var(--muted);cursor:pointer}.pill.active{background:var(--ink);color:white}.pill b{background:#ffffff2c;padding:1px 6px;border-radius:10px}.inventory-list{display:grid;gap:9px}.inventory-item{display:grid;grid-template-columns:52px 1fr 140px;align-items:center;gap:14px;background:white;border:1px solid var(--line);border-radius:12px;padding:12px 16px;transition:.2s}.inventory-item:focus-within{border-color:#528675;box-shadow:0 0 0 3px #dcece6}.product-thumb{width:48px;height:48px;border-radius:9px;display:grid;place-items:center;font-size:25px;background:#f0f3ed}.product-info strong{display:block;font-size:14px}.product-info span{font-size:11px;color:var(--muted)}.new-badge{font-style:normal;background:#fff0d8;color:#ad681d;padding:2px 6px;border-radius:5px;margin-left:7px}.quantity-wrap{display:flex;align-items:center;gap:9px}.quantity-wrap input{width:92px;border:1px solid #ccd8d4;border-radius:9px;padding:10px 9px;text-align:right;font-size:17px;font-weight:700;outline:none}.quantity-wrap span{font-size:13px;color:var(--muted)}.bottom-action{position:fixed;z-index:5;bottom:0;left:240px;right:0;background:#ffffffef;backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px max(46px,calc((100vw - 240px - 1028px)/2));display:flex;align-items:center;justify-content:flex-end;gap:35px}.bottom-action div{display:grid;text-align:right}.bottom-action div span{font-size:11px;color:var(--muted)}.bottom-action div strong{font-size:19px}.bottom-action button span{padding-left:20px}.purchase-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px}.camera-card,.form-card,.table-card,.summary-card{background:white;border:1px solid var(--line);border-radius:14px}.camera-card{text-align:center;padding:44px 30px;height:max-content}.camera-illustration{width:120px;height:120px;border-radius:50%;background:var(--mint);display:grid;place-items:center;margin:0 auto 23px}.camera-illustration span{font-size:46px;color:#397764}.camera-card p,.form-title p{font-size:12px;color:var(--muted);margin:7px 0 24px}.camera-button{display:inline-block}.camera-button input{display:none}.form-card{padding:27px}.form-title{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:21px}.form-title>span{display:grid;place-items:center;width:34px;height:34px;background:var(--green);color:white;border-radius:50%;font-weight:700}.form-title p{margin:3px 0 0}.form-card label{display:grid;gap:7px;font-size:12px;font-weight:700;margin-bottom:17px}.form-card input,.form-card select{border:1px solid #ccd8d4;border-radius:9px;padding:12px;outline:none;background:white}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.yen-input{position:relative}.yen-input span{position:absolute;left:12px;top:11px;color:var(--muted)}.yen-input input{width:100%;padding-left:30px}.wide{width:100%}.photo-preview{height:110px;background-position:center;background-size:cover;border-radius:10px;margin-bottom:15px}.hidden{display:none!important}.table-card{overflow:hidden}.table-card table{width:100%;border-collapse:collapse;text-align:left}.table-card th{font-size:11px;color:var(--muted);background:#fafbfb;padding:14px 20px}.table-card td{padding:17px 20px;border-top:1px solid var(--line);font-size:13px}.status{padding:5px 10px;border-radius:15px;font-size:11px}.status.done{background:#dff0e9;color:#2a735d}.status.editing{background:#fff0dc;color:#ad681d}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.summary-card{padding:21px;display:grid;gap:6px}.summary-card>span{font-size:12px;color:var(--muted)}.summary-card strong{font-size:25px}.summary-card strong small{font-size:12px;color:var(--muted)}.summary-card i{font-size:10px;color:var(--muted);font-style:normal}.summary-card i.green{color:#3b806a}.summary-card i.orange{color:var(--orange)}.mini-progress{width:80px;height:5px;background:#e3e9e7;border-radius:4px;display:inline-block;margin-right:8px}.mini-progress span{display:block;height:100%;background:#4b8a76;border-radius:4px}.toast{position:fixed;z-index:20;top:20px;left:50%;transform:translate(-50%,-100px);background:#173f36;color:white;padding:13px 24px;border-radius:9px;box-shadow:0 8px 25px #0003;transition:.3s}.toast.show{transform:translate(-50%,0)}.modal{position:fixed;z-index:30;inset:0;background:#102b267d;display:grid;place-items:center}.modal-card{background:white;border-radius:18px;padding:38px;text-align:center;width:min(90%,390px)}.modal-card p{color:var(--muted);font-size:13px;line-height:1.8}.success-mark{display:grid;place-items:center;margin:0 auto 18px;width:60px;height:60px;border-radius:50%;background:#dcefe8;color:#2f8066;font-size:28px}
@@ -382,6 +385,7 @@ body {
         <button class="nav-item" data-view="purchase"><span>＋</span> 仕入登録</button>
         <button class="nav-item" data-view="master"><span>▤</span> 商品マスタ</button>
         <button class="nav-item hq-nav" data-view="hq"><span>◫</span> 本部確認</button>
+        <button class="nav-item hq-nav" data-view="hq-master"><span>▤</span> 商品マスタ管理</button>
         <button class="nav-item settings-nav" data-view="settings"><span>⚙</span> 設定</button>
       </nav>
       <div class="store-card">
@@ -461,6 +465,18 @@ body {
         <div class="page-head"><div><p class="eyebrow">本部ダッシュボード</p><h1>店舗の棚卸状況</h1><p class="subtitle">全店舗の進捗と在庫金額を確認できます。</p></div><div class="page-head-actions"><button id="refresh-hq" class="outline-button">↻ 最新の情報に更新</button><label class="month-picker hq-month-picker"><span>確認する年月</span><input id="hq-month" type="month" value="2026-07" aria-label="確認する年月を選択"></label></div></div>
         <div class="summary-grid"><div class="summary-card"><span>完了店舗</span><strong>2 <small>/ 3店</small></strong><i class="green">前月比 +1</i></div><div class="summary-card"><span>全店の在庫金額</span><strong>¥228,800</strong><i id="hq-summary-month">7月時点</i></div><div class="summary-card"><span>未完了店舗</span><strong>1 <small>店</small></strong><i class="orange">要確認</i></div></div>
         <div class="table-card"><table><thead><tr><th>店舗</th><th>進捗</th><th>在庫金額</th><th>単価未入力</th><th>最終更新</th><th>状態</th></tr></thead><tbody><tr><td><strong>本店</strong></td><td><div class="mini-progress"><span style="width:25%"></span></div> 2 / 8</td><td>¥3,580</td><td>0件</td><td>たった今</td><td><span class="status editing">入力中</span></td></tr><tr><td><strong>east</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 42 / 42</td><td>¥128,420</td><td>0件</td><td>7月1日 21:04</td><td><span class="status done">完了</span></td></tr><tr><td><strong>ASAHI</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 38 / 38</td><td>¥96,800</td><td>0件</td><td>7月1日 18:32</td><td><span class="status done">完了</span></td></tr></tbody></table></div>
+      </section>
+
+      <section id="hq-master" class="view">
+        <div class="page-head"><div><p class="eyebrow">本部専用</p><h1>商品マスタ管理</h1><p class="subtitle">各店舗の商品名・種類・仕入単価を本部で確認、修正できます。</p></div><button id="refresh-hq-master" class="outline-button">↻ 最新の情報に更新</button></div>
+        <div class="master-toolbar hq-master-toolbar">
+          <label class="select-control"><span>店舗</span><select id="hq-master-store"><option value="本店">本店</option><option value="east">east</option><option value="ASAHI">ASAHI</option></select></label>
+          <label class="search master-search"><span>⌕</span><input id="hq-master-search" placeholder="商品名で検索"></label>
+          <label class="select-control"><span>種類</span><select id="hq-master-category"><option value="all">すべて</option></select></label>
+          <label class="select-control"><span>単価</span><select id="hq-master-price-filter"><option value="all">すべて表示</option><option value="missing">単価未入力のみ</option><option value="entered">単価入力済みのみ</option></select></label>
+          <span id="hq-master-result-count" class="result-count"></span>
+        </div>
+        <div class="table-card"><table><thead><tr><th>商品名</th><th>分類</th><th>仕入単価</th><th>登録日</th></tr></thead><tbody id="hq-master-body"></tbody></table></div>
       </section>
 
       <section id="settings" class="view">
@@ -625,6 +641,9 @@ let editingCompletedMonth = false;
 let customCategories = [];
 let pendingLoginStore = "";
 let confirmAction = null;
+let detailContext = "store";
+let detailProductStore = "";
+let hqMasterStore = "本店";
 
 const defaultStoreSettings = {
   "本店": { pin: "0092", locations: ["冷蔵庫", "倉庫", "カウンター"] },
@@ -705,6 +724,30 @@ function renderCategoryOptions() {
     select.innerHTML = '<option value="all">すべて</option>' + categories.map(c => `<option value="${c.value}">${c.label}</option>`).join("");
     select.value = categories.some(c => c.value === selected) ? selected : "all";
   });
+}
+
+function categoriesForStore(store) {
+  const storeCustomCategories = JSON.parse(localStorage.getItem(storeKey("custom-categories", store)) || "[]");
+  const priority = category => {
+    if (category.value === "beer") return 0;
+    if (category.value === "sake") return 1;
+    if (category.value === "shochu") return 2;
+    if (category.value === "whisky") return 3;
+    if (category.value === "wine") return 4;
+    if (category.value === "custom-liqueur" || category.label === "リキュール") return 5;
+    if (category.value === "soft") return 6;
+    if (category.value === "other") return 8;
+    return 7;
+  };
+  return [...baseCategories, ...storeCustomCategories]
+    .map((category, index) => ({ ...category, index }))
+    .sort((a, b) => priority(a) - priority(b) || a.index - b.index);
+}
+
+function fillSelectOptions(select, categories, { includeAll = false } = {}) {
+  const selected = select.value;
+  select.innerHTML = (includeAll ? '<option value="all">すべて</option>' : "") + categories.map(c => `<option value="${c.value}">${c.label}</option>`).join("");
+  select.value = categories.some(c => c.value === selected) || (includeAll && selected === "all") ? selected : (includeAll ? "all" : categories[0]?.value || "");
 }
 
 function renderInventoryFilters() {
@@ -865,6 +908,48 @@ async function updateStoreUnitPrice(store, productId, price) {
   }
 }
 
+async function saveHqMasterProduct() {
+  const payload = readStorePayload(detailProductStore);
+  const product = payload.products.find(p => p.id === selectedProductId);
+  if (!product) return toast("商品が見つかりませんでした");
+  const category = document.querySelector("#detail-product-category");
+  const icons = { beer: "🍺", sake: "🍶", shochu: "🍶", wine: "🍷", whisky: "🥃", soft: "🥤", other: "🍾" };
+  const price = Number(document.querySelector("#detail-product-price").value || 0);
+  product.name = document.querySelector("#detail-product-name").value.trim();
+  product.category = category.value;
+  product.categoryLabel = category.options[category.selectedIndex].text;
+  product.price = price;
+  product.icon = icons[category.value] || "🍾";
+  try {
+    product.photo = await window.hiyokoCloud?.uploadImage(detailProductStore, product.id, pendingDetailPhoto) || pendingDetailPhoto;
+  } catch (error) {
+    console.error(error);
+    product.photo = pendingDetailPhoto;
+    toast("写真は端末に保存しましたが、共有に失敗しました");
+  }
+  if (payload.completedMonths.includes(currentMonth)) {
+    const monthPrices = payload.priceSnapshots[currentMonth] || {};
+    if (Number(monthPrices[product.id] || 0) <= 0 && price > 0) {
+      payload.priceSnapshots[currentMonth] = { ...monthPrices, [product.id]: price };
+    }
+  }
+  cacheStorePayload(detailProductStore, payload);
+  if (detailProductStore === activeStore) {
+    products = payload.products;
+    priceSnapshots = payload.priceSnapshots;
+  }
+  try {
+    await window.hiyokoCloud?.saveStore(detailProductStore, payload);
+    toast(`${detailProductStore}の商品マスタを共有しました`);
+  } catch (error) {
+    console.error(error);
+    toast("端末には保存しましたが、共有に失敗しました");
+  }
+  renderHqMaster();
+  updateHQCompletionTimes();
+  document.querySelector("#product-detail-modal").classList.add("hidden");
+}
+
 function setSyncStatus(text, syncing = false) {
   const element = document.querySelector(".sync");
   if (!element) return;
@@ -1023,6 +1108,35 @@ function renderMaster() {
   document.querySelectorAll("[data-product-detail]").forEach(button => button.addEventListener("click", () => openProductDetail(Number(button.dataset.productDetail))));
 }
 
+function renderHqMaster() {
+  hqMasterStore = document.querySelector("#hq-master-store").value;
+  const payload = readStorePayload(hqMasterStore);
+  const storeProducts = payload.products || [];
+  const query = document.querySelector("#hq-master-search").value.trim().toLowerCase();
+  const priceFilter = document.querySelector("#hq-master-price-filter").value;
+  fillSelectOptions(document.querySelector("#hq-master-category"), categoriesForStore(hqMasterStore), { includeAll: true });
+  const category = document.querySelector("#hq-master-category").value;
+  const categoryOrder = new Map(categoriesForStore(hqMasterStore).map((item, index) => [item.value, index]));
+  const visible = storeProducts.filter(p =>
+    p.name.toLowerCase().includes(query) &&
+    (category === "all" || p.category === category) &&
+    (priceFilter === "all" || (priceFilter === "missing" && Number(p.price || 0) <= 0) || (priceFilter === "entered" && Number(p.price || 0) > 0))
+  ).sort((a, b) =>
+    (categoryOrder.get(a.category) ?? 999) - (categoryOrder.get(b.category) ?? 999) ||
+    a.name.localeCompare(b.name, "ja")
+  );
+  document.querySelector("#hq-master-result-count").textContent = `${visible.length}件`;
+  document.querySelector("#hq-master-body").innerHTML = visible.length
+    ? visible.map(p => {
+      const photo = `<div class="product-thumb master-thumb">${p.photo ? `<img src="${p.photo}" alt="${p.name}">` : '<span class="no-photo">写真<br>なし</span>'}</div>`;
+      const price = Number(p.price || 0);
+      const priceLabel = price > 0 ? `<span class="master-price">${yen(price)}</span>` : '<span class="status price-missing">単価未入力</span>';
+      return `<tr class="${price <= 0 ? "missing-price-row" : ""}"><td><div class="master-product-cell">${photo}<button class="product-name-button" data-hq-product-detail="${p.id}">${p.name}</button></div></td><td><span class="category-badge ${p.category}">${p.categoryLabel}</span></td><td>${priceLabel}</td><td>${p.registeredDate || "未記録"}</td></tr>`;
+    }).join("")
+    : '<tr><td colspan="4" class="empty-cell">該当する商品がありません</td></tr>';
+  document.querySelectorAll("[data-hq-product-detail]").forEach(button => button.addEventListener("click", () => openHqProductDetail(hqMasterStore, Number(button.dataset.hqProductDetail))));
+}
+
 function renderStoreSettings() {
   const settings = loadAllStoreSettings();
   document.querySelector("#store-settings-list").innerHTML = ["本店", "east", "ASAHI"].map(store => `
@@ -1046,15 +1160,38 @@ function setProductDetailEditing(editing) {
 }
 
 function openProductDetail(id) {
+  detailContext = "store";
+  detailProductStore = activeStore;
   selectedProductId = id;
   const product = products.find(p => p.id === id);
   pendingDetailPhoto = product.photo || "";
+  fillSelectOptions(document.querySelector("#detail-product-category"), orderedCategories());
   document.querySelector("#detail-product-name").value = product.name;
   document.querySelector("#detail-product-category").value = product.category;
   document.querySelector("#detail-product-price").value = product.price;
   const photo = document.querySelector("#detail-product-photo");
   photo.innerHTML = product.photo ? `<img src="${product.photo}" alt="${product.name}">` : "<span>写真なし</span>";
   setProductDetailEditing(false);
+  document.querySelector("#product-detail-modal .eyebrow").textContent = "商品マスタ";
+  document.querySelector("#product-detail-modal").classList.remove("hidden");
+}
+
+function openHqProductDetail(store, id) {
+  detailContext = "hq-master";
+  detailProductStore = store;
+  selectedProductId = id;
+  const payload = readStorePayload(store);
+  const product = payload.products.find(p => p.id === id);
+  if (!product) return toast("商品が見つかりませんでした");
+  pendingDetailPhoto = product.photo || "";
+  fillSelectOptions(document.querySelector("#detail-product-category"), categoriesForStore(store));
+  document.querySelector("#detail-product-name").value = product.name;
+  document.querySelector("#detail-product-category").value = product.category;
+  document.querySelector("#detail-product-price").value = product.price || 0;
+  const photo = document.querySelector("#detail-product-photo");
+  photo.innerHTML = product.photo ? `<img src="${product.photo}" alt="${product.name}">` : "<span>写真なし</span>";
+  setProductDetailEditing(false);
+  document.querySelector("#product-detail-modal .eyebrow").textContent = `${store} 商品マスタ`;
   document.querySelector("#product-detail-modal").classList.remove("hidden");
 }
 
@@ -1193,11 +1330,12 @@ function downloadStoreDetail() {
 }
 
 function showView(id) {
-  if (activeRole === "store" && (id === "hq" || id === "settings")) return;
+  if (activeRole === "store" && (id === "hq" || id === "hq-master" || id === "settings")) return;
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
   document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === id));
   document.querySelector(".sidebar").classList.remove("open");
   if (id === "master") renderMaster();
+  if (id === "hq-master") renderHqMaster();
   if (id === "settings") renderStoreSettings();
   window.scrollTo(0, 0);
 }
@@ -1258,6 +1396,7 @@ async function enterHeadOffice() {
   document.body.classList.add("hq-mode");
   document.querySelector("#login-screen").classList.add("hidden");
   markActivity();
+  renderHqMaster();
   showView("hq");
   updateHQCompletionTimes();
 }
@@ -1395,6 +1534,7 @@ document.querySelector("#detail-photo-input").addEventListener("change", event =
 });
 document.querySelector("#product-detail-form").addEventListener("submit", async event => {
   event.preventDefault();
+  if (detailContext === "hq-master") return saveHqMasterProduct();
   const product = products.find(p => p.id === selectedProductId);
   const category = document.querySelector("#detail-product-category");
   const icons = { beer: "🍺", sake: "🍶", shochu: "🍶", wine: "🍷", whisky: "🥃", soft: "🥤", other: "🍾" };
@@ -1418,6 +1558,14 @@ document.querySelector("#master-search").addEventListener("input", renderMaster)
 document.querySelector("#master-category").addEventListener("change", renderMaster);
 document.querySelector("#master-status").addEventListener("change", renderMaster);
 document.querySelector("#master-sort").addEventListener("change", renderMaster);
+document.querySelector("#hq-master-store").addEventListener("change", renderHqMaster);
+document.querySelector("#hq-master-search").addEventListener("input", renderHqMaster);
+document.querySelector("#hq-master-category").addEventListener("change", renderHqMaster);
+document.querySelector("#hq-master-price-filter").addEventListener("change", renderHqMaster);
+document.querySelector("#refresh-hq-master").addEventListener("click", async () => {
+  await refreshHeadOfficeData();
+  renderHqMaster();
+});
 document.querySelector("#save-store-settings").addEventListener("click", async () => {
   const settings = loadAllStoreSettings();
   let valid = true;
