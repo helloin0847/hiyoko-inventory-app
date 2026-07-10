@@ -1304,7 +1304,7 @@ function openStoreDetail(storeName) {
     const amount = inventoryAmount(p, unitPrice);
     const locationBreakdown = `<small class="detail-memo">${locationNames[0]}：${p.qty || 0} ／ ${locationNames[1]}：${p.quantityMemo || 0} ／ ${locationNames[2]}：${p.quantityMemo2 || 0} ${p.unit}</small>`;
     const priceCell = `<div class="hq-price-cell"><span>¥</span><input class="hq-price-input" data-hq-price-id="${p.id}" inputmode="numeric" type="number" min="0" value="${unitPrice || 0}" aria-label="${p.name}の仕入単価">${Number(unitPrice || 0) <= 0 ? '<small>単価未入力</small>' : ""}</div>`;
-    return `<tr class="${Number(unitPrice || 0) <= 0 ? "missing-price-row" : ""}"><td><strong>${p.name}</strong>${locationBreakdown}</td><td>${p.categoryLabel}</td><td>${p.qty === "" ? "未入力" : `${totalQuantity} ${p.unit}`}</td><td>${priceCell}</td><td><strong>${yen(amount)}</strong></td></tr>`;
+    return `<tr class="${Number(unitPrice || 0) <= 0 ? "missing-price-row" : ""}"><td><strong>${p.name}</strong>${locationBreakdown}</td><td>${p.categoryLabel}</td><td>${isInventoryFilled(p) ? `${totalQuantity} ${p.unit}` : "未入力"}</td><td>${priceCell}</td><td><strong>${yen(amount)}</strong></td></tr>`;
   }).join("");
   document.querySelectorAll("[data-hq-price-id]").forEach(input => input.addEventListener("change", async event => {
     const price = Number(event.target.value || 0);
