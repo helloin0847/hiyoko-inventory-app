@@ -425,6 +425,7 @@ body {
 
         <div id="inventory-list" class="inventory-list"></div>
         <div class="bottom-action">
+          <button id="draft-button" class="outline-button">一時保存する</button>
           <button id="complete-button" class="primary-button">棚卸を完了する <span>→</span></button>
         </div>
       </section>
@@ -1047,10 +1048,15 @@ function renderInventory() {
 
 function updateCompletionButton() {
   const button = document.querySelector("#complete-button");
+  const draftButton = document.querySelector("#draft-button");
   const completed = completedMonths.includes(currentMonth);
   button.textContent = completed
     ? (editingCompletedMonth ? "修正内容を送信する →" : "棚卸内容を修正する →")
     : "棚卸を完了する →";
+  if (draftButton) {
+    draftButton.textContent = completed && editingCompletedMonth ? "修正内容を一時保存" : "一時保存する";
+    draftButton.classList.toggle("hidden", completed && !editingCompletedMonth);
+  }
   document.querySelector("#open-add-inventory").classList.toggle("locked-action", completed && !editingCompletedMonth);
 }
 
@@ -1486,6 +1492,15 @@ document.querySelector("#inventory-month").value = currentMonth;
 document.querySelector("#hq-month").value = currentMonth;
 document.querySelector("#inventory-month-label").textContent = monthLabel(currentMonth);
 document.querySelector("#hq-summary-month").textContent = `${Number(currentMonth.split("-")[1])}月時点`;
+document.querySelector("#draft-button").addEventListener("click", async () => {
+  if (completedMonths.includes(currentMonth) && !editingCompletedMonth) {
+    return toast("棚卸データ送信済みです。修正する場合は下のボタンを押してください。");
+  }
+  save();
+  saveMonthState();
+  const shared = await flushCloudSync();
+  toast(shared ? "一時保存しました。本部にも共有済みです" : "この端末に一時保存しました。通信が戻ったら本部へ共有されます");
+});
 document.querySelector("#inventory-month").addEventListener("change", event => {
   if (event.target.value) switchMonth(event.target.value);
 });
