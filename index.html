@@ -17,6 +17,7 @@
 .product-thumb{overflow:hidden}.product-thumb img{width:100%;height:100%;object-fit:cover}.no-photo{font-size:9px!important;line-height:1.25;text-align:center;color:#8a9793!important}.category-badge{display:inline-block!important;margin-top:5px;margin-right:8px;padding:2px 7px;border-radius:10px;font-size:10px!important;font-weight:700}.category-badge.beer{background:#fff0cc;color:#916414}.category-badge.sake{background:#e7f0fa;color:#356b9a}.category-badge.shochu{background:#eee8f8;color:#694d91}.category-badge.wine{background:#f6e4e8;color:#923e50}.category-badge.whisky{background:#f3e5d8;color:#8b5428}.category-badge.soft{background:#e2f2e9;color:#347158}.category-badge.other{background:#ecefed;color:#596560}.price-copy{font-size:11px!important;color:#6d7c78!important}
 .master-toolbar{display:flex;align-items:end;gap:10px;margin-bottom:14px}.master-search{width:min(320px,100%)}.select-control{display:grid;gap:5px}.select-control span{font-size:10px;color:#6d7c78;font-weight:700}.select-control select{min-width:145px;border:1px solid #d0dad7;background:#fff;border-radius:10px;padding:10px 34px 10px 11px;color:#172b27}.result-count{margin-left:auto;padding-bottom:10px;color:#6d7c78;font-size:12px}.empty-cell{text-align:center!important;color:#6d7c78;padding:38px!important}
 .product-name-button{border:0;background:transparent;padding:4px 0;color:#17634f;font-weight:700;text-align:left;cursor:pointer;display:flex;align-items:center;gap:9px;flex-wrap:wrap}.product-name-button>span:first-child{text-decoration:underline;text-underline-offset:3px}.master-photo-status{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:10px;font-size:9px;font-weight:700;text-decoration:none}.master-photo-status svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}.master-photo-status.missing-photo{background:#f0f2f1;color:#7b8884}.master-photo-status.has-photo{background:#dff0e9;color:#2a735d}.product-detail-card{width:min(92%,500px);text-align:left;padding:28px;max-height:92vh;overflow:auto}.detail-product-photo{height:150px;display:grid;place-items:center;background:#f1f4f2;border-radius:12px;margin:16px 0;color:#84918d;font-size:12px;overflow:hidden}.detail-product-photo img{width:100%;height:100%;object-fit:contain}.photo-change{display:block;width:max-content;margin:-3px auto 16px;cursor:pointer}.photo-change input{display:none}.detail-field{display:grid;gap:6px;margin-bottom:14px;font-size:11px;font-weight:700}.detail-field input,.detail-field select{width:100%;border:1px solid #d4ddda;border-radius:9px;background:#f5f7f6;padding:11px;color:#263b35}.product-detail-card.editing .detail-field input,.product-detail-card.editing .detail-field select{background:#fff;border-color:#8db5a8}
+.danger-button{border:1px solid #f0c2ba;background:#fff6f4;color:#9b3d31;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:10px}.danger-button:hover{background:#fde9e4;border-color:#e6a99e}
 .inline-add-button{border:0;background:transparent;color:#34715f;font-size:11px;font-weight:700;padding:0;margin:0 0 10px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.category-card{width:min(92%,420px);text-align:left;padding:28px}.category-badge[class*="custom-"]{background:#e8e8f5;color:#575483}
 .store-mode .settings-nav{display:none!important}.hq-mode nav .settings-nav{display:block!important}.hq-mode nav .nav-item:not(.hq-nav):not(.settings-nav){display:none!important}.settings-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.settings-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}.settings-card-head{display:flex;align-items:center;gap:11px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}.settings-card-head>span{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffe08a;color:#684915;font-weight:700}.settings-card-head h2{margin:0}.settings-card-head p{margin:2px 0 0;color:var(--muted);font-size:10px}.settings-card label{display:grid;gap:5px;margin-bottom:12px;color:var(--muted);font-size:10px;font-weight:700}.settings-card input{width:100%;border:1px solid #cfddd9;border-radius:9px;padding:10px;background:#f8fbfa;color:var(--ink)}.location-settings{margin-top:18px}.settings-save-bar{display:flex;align-items:center;justify-content:flex-end;gap:20px;margin-top:18px}.settings-save-bar p{color:var(--muted);font-size:11px}.pin-card,.confirm-card{width:min(92%,400px);text-align:center;padding:30px}.pin-chick img,.confirm-chick img{width:82px;height:82px;object-fit:contain}.pin-input{display:block;width:180px;margin:20px auto 10px;border:2px solid #9fcfc3;border-radius:12px;padding:12px;text-align:center;font-size:28px;letter-spacing:.35em;color:var(--ink)}.pin-error{color:#b54d45;font-size:12px;margin:0 0 12px}.text-button{border:0;background:transparent;color:var(--muted);font-size:11px;margin-top:12px;cursor:pointer}.confirm-card p{color:var(--muted);font-size:13px;line-height:1.7}.confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
 #pin-modal{z-index:120}
@@ -524,6 +525,7 @@ body {
       <label class="detail-field">仕入単価（税込）<div class="yen-input"><span>¥</span><input id="detail-product-price" type="number" min="0" required readonly></div></label>
       <button type="button" id="edit-product-button" class="primary-button wide">修正する</button>
       <button type="submit" id="save-product-button" class="primary-button wide hidden">修正内容を保存する</button>
+      <button type="button" id="delete-product-button" class="danger-button wide hidden">商品マスタから削除する</button>
     </form>
   </div>
   <div id="category-modal" class="modal hidden">
@@ -957,6 +959,46 @@ async function saveHqMasterProduct() {
   document.querySelector("#product-detail-modal").classList.add("hidden");
 }
 
+function removeProductFromStorePayload(payload, productId) {
+  payload.products = (payload.products || []).filter(p => p.id !== productId);
+  ["quantitySnapshots", "memoSnapshots", "memo2Snapshots", "priceSnapshots"].forEach(key => {
+    Object.values(payload[key] || {}).forEach(monthData => {
+      if (monthData && typeof monthData === "object") delete monthData[productId];
+    });
+  });
+  Object.keys(payload.exclusionSnapshots || {}).forEach(month => {
+    payload.exclusionSnapshots[month] = (payload.exclusionSnapshots[month] || []).filter(id => id !== productId);
+  });
+}
+
+async function deleteHqMasterProduct() {
+  if (detailContext !== "hq-master" || !detailProductStore || !selectedProductId) return;
+  const payload = readStorePayload(detailProductStore);
+  const product = payload.products.find(p => p.id === selectedProductId);
+  if (!product) return toast("商品が見つかりませんでした");
+  removeProductFromStorePayload(payload, selectedProductId);
+  cacheStorePayload(detailProductStore, payload);
+  if (detailProductStore === activeStore) {
+    products = payload.products;
+    quantitySnapshots = payload.quantitySnapshots;
+    memoSnapshots = payload.memoSnapshots;
+    memo2Snapshots = payload.memo2Snapshots;
+    priceSnapshots = payload.priceSnapshots;
+    exclusionSnapshots = payload.exclusionSnapshots;
+    excludedProductIds = exclusionSnapshots[currentMonth] || [];
+  }
+  try {
+    await window.hiyokoCloud?.saveStore(detailProductStore, payload);
+    toast(`${product.name}を商品マスタから削除しました`);
+  } catch (error) {
+    console.error(error);
+    toast("端末には保存しましたが、本部への共有に失敗しました");
+  }
+  document.querySelector("#product-detail-modal").classList.add("hidden");
+  renderHqMaster();
+  updateHQCompletionTimes();
+}
+
 function setSyncStatus(text, syncing = false) {
   const element = document.querySelector(".sync");
   if (!element) return;
@@ -1168,6 +1210,7 @@ function setProductDetailEditing(editing) {
   document.querySelector("#detail-photo-change").classList.toggle("hidden", !editing);
   document.querySelector("#edit-product-button").classList.toggle("hidden", editing);
   document.querySelector("#save-product-button").classList.toggle("hidden", !editing);
+  document.querySelector("#delete-product-button").classList.toggle("hidden", detailContext !== "hq-master");
   document.querySelector("#product-detail-form").classList.toggle("editing", editing);
 }
 
@@ -1540,6 +1583,18 @@ document.querySelector("#category-form").addEventListener("submit", event => {
   toast(`${label}を種類に追加しました`);
 });
 document.querySelector("#edit-product-button").addEventListener("click", () => setProductDetailEditing(true));
+document.querySelector("#delete-product-button").addEventListener("click", () => {
+  if (detailContext !== "hq-master") return;
+  const payload = readStorePayload(detailProductStore);
+  const product = payload.products.find(p => p.id === selectedProductId);
+  if (!product) return toast("商品が見つかりませんでした");
+  askConfirm(
+    "商品を削除しますか？",
+    `${detailProductStore}の商品マスタから「${product.name}」を削除します。棚卸一覧からも表示されなくなります。`,
+    "削除する",
+    deleteHqMasterProduct
+  );
+});
 document.querySelector("#detail-photo-input").addEventListener("change", event => {
   const file = event.target.files[0]; if (!file) return;
   const reader = new FileReader();
