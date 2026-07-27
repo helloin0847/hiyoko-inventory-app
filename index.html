@@ -199,6 +199,23 @@
   .print-note { display: block; }
 }
 
+.danger-outline-button {
+  border: 1px solid #efc5bd;
+  background: #fff8f6;
+  color: #9c3d31;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.danger-outline-button:hover {
+  background: #ffe9e5;
+  border-color: #e9a99d;
+}
+@media print {
+  .danger-outline-button { display: none; }
+}
+
 :root {
   --ink: #173c36;
   --muted: #6a827d;
@@ -543,6 +560,7 @@ body {
       <div class="detail-top">
         <button id="close-detail" class="back-button">← 店舗一覧へ戻る</button>
         <div class="detail-actions">
+          <button id="hq-clear-inventory" class="danger-outline-button">棚卸データをクリア</button>
           <button id="download-detail" class="outline-button">↓ CSVダウンロード</button>
           <button id="print-detail" class="primary-button">印刷する</button>
         </div>
@@ -1455,6 +1473,43 @@ function openStoreDetail(storeName) {
   document.body.classList.add("detail-open");
 }
 
+async function clearHeadOfficeInventoryData() {
+  if (activeRole !== "hq" || !selectedStore) return;
+  const payload = readStorePayload(selectedStore);
+  const month = currentMonth;
+  const emptyQuantities = Object.fromEntries((payload.products || []).map(product => [product.id, ""]));
+  payload.quantitySnapshots = { ...(payload.quantitySnapshots || {}), [month]: emptyQuantities };
+  payload.memoSnapshots = { ...(payload.memoSnapshots || {}), [month]: emptyQuantities };
+  payload.memo2Snapshots = { ...(payload.memo2Snapshots || {}), [month]: emptyQuantities };
+  payload.completedMonths = (payload.completedMonths || []).filter(doneMonth => doneMonth !== month);
+  payload.completionTimestamps = { ...(payload.completionTimestamps || {}) };
+  delete payload.completionTimestamps[month];
+  cacheStorePayload(selectedStore, payload);
+  if (selectedStore === activeStore) {
+    products = payload.products;
+    quantitySnapshots = payload.quantitySnapshots;
+    memoSnapshots = payload.memoSnapshots;
+    memo2Snapshots = payload.memo2Snapshots;
+    completedMonths = payload.completedMonths;
+    completionTimestamps = payload.completionTimestamps;
+    products.forEach(product => {
+      product.qty = "";
+      product.quantityMemo = "";
+      product.quantityMemo2 = "";
+    });
+    editingCompletedMonth = false;
+  }
+  try {
+    await window.hiyokoCloud?.saveStore(selectedStore, payload);
+    toast(`${selectedStore}の${monthLabel(month)}分の棚卸データをクリアしました`);
+  } catch (error) {
+    console.error(error);
+    toast("端末には保存しましたが、本部共有に失敗しました。通信を確認してください");
+  }
+  updateHQCompletionTimes();
+  openStoreDetail(selectedStore);
+}
+
 function downloadStoreDetail() {
   const rows = getStoreReportRows(selectedStore);
   const locationNames = locationNamesFor(selectedStore);
@@ -1619,6 +1674,15 @@ document.querySelectorAll("#hq tbody tr").forEach((row, index) => {
 document.querySelector("#close-detail").addEventListener("click", closeStoreDetail);
 document.querySelector("#download-detail").addEventListener("click", downloadStoreDetail);
 document.querySelector("#print-detail").addEventListener("click", () => window.print());
+document.querySelector("#hq-clear-inventory").addEventListener("click", () => {
+  if (!selectedStore) return;
+  askConfirm(
+    "棚卸データをクリアしますか？",
+    `${selectedStore}の${monthLabel(currentMonth)}分の数量と棚卸完了日時を空に戻します。商品マスタ・商品一覧・単価は消えません。`,
+    "棚卸データをクリアする",
+    () => { clearHeadOfficeInventoryData(); }
+  );
+});
 document.querySelector("#refresh-hq").addEventListener("click", refreshHeadOfficeData);
 document.querySelector("#search-input").addEventListener("input", renderInventory);
 document.querySelector("#inventory-month").value = currentMonth;
