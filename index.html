@@ -47,7 +47,48 @@
 .quiet-danger-button{border:0;background:transparent;color:#9b6b63;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:2px 4px;opacity:.72}
 .quiet-danger-button:hover{color:#9c3d31;opacity:1}
 .quiet-danger-button.hidden{display:none}
+.bottom-add-button{margin-right:auto;border-color:#cfe0da;color:#2d6f5d;background:#f8fcfa;padding:10px 14px}
+.bottom-add-button:hover{background:#eaf5f1;border-color:#a9ccc0}
 @media(max-width:800px){.toolbar-right{justify-items:start;gap:6px}.quiet-danger-button{margin-left:4px;font-size:11px}}
+@media(max-width:1180px) and (orientation:landscape){
+  .topbar{height:54px;padding:0 22px}
+  .view{padding:22px 24px 96px}
+  .page-head{margin-bottom:14px}
+  .month-picker-left{margin-bottom:6px}
+  h1{font-size:24px;margin-bottom:4px}
+  .subtitle{font-size:12px}
+  .progress-card{padding:10px 14px;gap:12px}
+  .progress-copy{min-width:190px}
+  .progress-copy small{display:none}
+  .progress-icon{width:30px;height:30px}
+  .toolbar{margin:12px 0 8px}
+  .pill{padding:6px 10px;font-size:11px}
+  .inventory-list{gap:6px}
+  .inventory-item{grid-template-columns:42px 1fr 320px;padding:7px 10px;gap:9px;border-radius:10px}
+  .product-thumb{width:40px;height:40px;font-size:18px}
+  .product-info strong{font-size:13px}
+  .product-info span{font-size:10px}
+  .count-entry{grid-template-columns:repeat(3,62px) 72px;gap:5px;width:273px}
+  .count-box>span,.count-total>span{font-size:8px}
+  .count-input{width:62px;height:32px;border-radius:7px;padding:5px;font-size:14px}
+  .count-total output{height:32px;font-size:12px;border-radius:7px}
+  .remove-product{width:32px;height:32px;border-radius:8px}
+  .bottom-action{padding:10px 24px;gap:12px}
+  .bottom-action .primary-button,.bottom-action .outline-button{padding:10px 14px}
+}
+.inventory-keypad-active #inventory .page-head,
+.inventory-keypad-active #inventory .progress-card{display:none}
+.inventory-keypad-active #inventory.view{padding-top:12px}
+.inventory-keypad-active .topbar{height:42px}
+.inventory-keypad-active #inventory .toolbar{margin:0 0 6px}
+.inventory-keypad-active #inventory .search{display:none}
+.inventory-keypad-active #inventory .filter-pills{max-width:100%;overflow:auto;padding-bottom:2px}
+.inventory-keypad-active #inventory .inventory-list{gap:5px}
+.inventory-keypad-active #inventory .inventory-item{padding-top:5px;padding-bottom:5px}
+.inventory-keypad-active #inventory .product-thumb{width:34px;height:34px}
+.inventory-keypad-active #inventory .count-input,
+.inventory-keypad-active #inventory .count-total output{height:30px}
+.inventory-keypad-active #inventory .bottom-action{padding-top:8px;padding-bottom:8px}
 
 .form-card .field-note{color:var(--muted);font-size:10px;font-weight:400;line-height:1.5}
 
@@ -410,7 +451,7 @@ body {
       <section id="inventory" class="view active">
         <div class="page-head">
           <div><label class="month-picker month-picker-left"><span>棚卸する年月</span><input id="inventory-month" type="month" value="2026-07" aria-label="棚卸する年月を選択"></label><p class="eyebrow month-readable" id="inventory-month-label">2026年 7月</p><h1>ドリンク棚卸</h1><p class="subtitle">残っている数量を、そのまま入力してください。</p></div>
-          <div class="page-head-actions"><button id="open-add-inventory" class="primary-button">＋ 商品を追加</button></div>
+          <div class="page-head-actions"><button id="open-add-inventory" class="primary-button" data-open-add-inventory>＋ 商品を追加</button></div>
         </div>
 
         <div class="progress-card">
@@ -434,6 +475,7 @@ body {
 
         <div id="inventory-list" class="inventory-list"></div>
         <div class="bottom-action">
+          <button id="bottom-add-inventory" class="outline-button bottom-add-button" type="button" data-open-add-inventory>＋ 商品追加</button>
           <button id="draft-button" class="outline-button">一時保存する</button>
           <button id="complete-button" class="primary-button">棚卸を完了する <span>→</span></button>
         </div>
@@ -1111,7 +1153,9 @@ function updateCompletionButton() {
   if (clearButton) {
     clearButton.classList.toggle("hidden", completed && !editingCompletedMonth);
   }
-  document.querySelector("#open-add-inventory").classList.toggle("locked-action", completed && !editingCompletedMonth);
+  document.querySelectorAll("[data-open-add-inventory]").forEach(addButton => {
+    addButton.classList.toggle("locked-action", completed && !editingCompletedMonth);
+  });
 }
 
 async function clearInventoryQuantities() {
@@ -1132,6 +1176,20 @@ async function clearInventoryQuantities() {
   renderInventory();
   const shared = await flushCloudSync();
   toast(shared ? "数量を一括クリアしました。本部にも共有済みです" : "数量を一括クリアしました。通信が戻ったら本部へ共有されます");
+}
+
+function openAddInventoryModal() {
+  if (completedMonths.includes(currentMonth) && !editingCompletedMonth) {
+    return toast("棚卸データ送信済みです。修正する場合は下のボタンを押してください。");
+  }
+  document.querySelector("#add-product-search").value = "";
+  document.querySelector("#add-product-category").value = "all";
+  renderExcludedProducts();
+  document.querySelector("#add-inventory-modal").classList.remove("hidden");
+}
+
+function setInventoryInputMode(active) {
+  document.body.classList.toggle("inventory-keypad-active", active);
 }
 
 function updateSummary() {
@@ -1593,14 +1651,17 @@ document.querySelector("#inventory-month").addEventListener("change", event => {
 document.querySelector("#hq-month").addEventListener("change", event => {
   if (event.target.value) switchMonth(event.target.value);
 });
-document.querySelector("#open-add-inventory").addEventListener("click", () => {
-  if (completedMonths.includes(currentMonth) && !editingCompletedMonth) {
-    return toast("棚卸データ送信済みです。修正する場合は下のボタンを押してください。");
-  }
-  document.querySelector("#add-product-search").value = "";
-  document.querySelector("#add-product-category").value = "all";
-  renderExcludedProducts();
-  document.querySelector("#add-inventory-modal").classList.remove("hidden");
+document.querySelectorAll("[data-open-add-inventory]").forEach(button => {
+  button.addEventListener("click", openAddInventoryModal);
+});
+document.addEventListener("focusin", event => {
+  if (event.target.classList?.contains("count-input")) setInventoryInputMode(true);
+});
+document.addEventListener("focusout", event => {
+  if (!event.target.classList?.contains("count-input")) return;
+  setTimeout(() => {
+    if (!document.activeElement?.classList?.contains("count-input")) setInventoryInputMode(false);
+  }, 80);
 });
 document.querySelector("#add-product-search").addEventListener("input", renderExcludedProducts);
 document.querySelector("#add-product-category").addEventListener("change", renderExcludedProducts);
