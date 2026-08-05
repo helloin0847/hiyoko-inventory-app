@@ -49,6 +49,9 @@
 .quiet-danger-button.hidden{display:none}
 .bottom-add-button{margin-right:auto;border-color:#cfe0da;color:#2d6f5d;background:#f8fcfa;padding:10px 14px}
 .bottom-add-button:hover{background:#eaf5f1;border-color:#a9ccc0}
+.previous-amount{display:block;margin-top:4px;color:#6d7c78!important;font-size:10px!important;font-weight:700!important;line-height:1.35}
+.detail-total small{display:block;margin-top:4px;color:#6d7c78;font-size:12px;font-weight:700}
+.detail-prev-foot{display:block;margin-top:4px;color:#6d7c78;font-size:11px;font-weight:700}
 @media(max-width:800px){.toolbar-right{justify-items:start;gap:6px}.quiet-danger-button{margin-left:4px;font-size:11px}}
 @media(max-width:1180px) and (orientation:landscape){
   .topbar{height:54px;padding:0 22px}
@@ -532,7 +535,7 @@ body {
 
       <section id="hq" class="view">
         <div class="page-head"><div><p class="eyebrow">本部ダッシュボード</p><h1>店舗の棚卸状況</h1><p class="subtitle">全店舗の進捗と在庫金額を確認できます。</p></div><div class="page-head-actions"><button id="refresh-hq" class="outline-button">↻ 最新の情報に更新</button><label class="month-picker hq-month-picker"><span>確認する年月</span><input id="hq-month" type="month" value="2026-07" aria-label="確認する年月を選択"></label></div></div>
-        <div class="summary-grid"><div class="summary-card"><span>完了店舗</span><strong>2 <small>/ 3店</small></strong><i class="green">前月比 +1</i></div><div class="summary-card"><span>全店の在庫金額</span><strong>¥228,800</strong><i id="hq-summary-month">7月時点</i></div><div class="summary-card"><span>未完了店舗</span><strong>1 <small>店</small></strong><i class="orange">要確認</i></div></div>
+        <div class="summary-grid"><div class="summary-card"><span>完了店舗</span><strong>2 <small>/ 3店</small></strong><i class="green">前月比 +1</i></div><div class="summary-card"><span>全店の在庫金額</span><strong>¥228,800</strong><i id="hq-summary-month">7月時点</i><i id="hq-summary-prev-month" class="previous-amount">前月（6月分）合計 ¥0</i></div><div class="summary-card"><span>未完了店舗</span><strong>1 <small>店</small></strong><i class="orange">要確認</i></div></div>
         <div class="table-card"><table><thead><tr><th>店舗</th><th>進捗</th><th>在庫金額</th><th>単価未入力</th><th>最終更新</th><th>状態</th></tr></thead><tbody><tr><td><strong>本店</strong></td><td><div class="mini-progress"><span style="width:25%"></span></div> 2 / 8</td><td>¥3,580</td><td>0件</td><td>たった今</td><td><span class="status editing">入力中</span></td></tr><tr><td><strong>east</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 42 / 42</td><td>¥128,420</td><td>0件</td><td>7月1日 21:04</td><td><span class="status done">完了</span></td></tr><tr><td><strong>ASAHI</strong></td><td><div class="mini-progress"><span style="width:100%"></span></div> 38 / 38</td><td>¥96,800</td><td>0件</td><td>7月1日 18:32</td><td><span class="status done">完了</span></td></tr></tbody></table></div>
       </section>
 
@@ -567,10 +570,10 @@ body {
       </div>
       <div class="detail-heading">
         <div><p class="eyebrow">棚卸内訳</p><h1 id="detail-store-name">本店</h1><p class="subtitle" id="detail-month">2026年 7月分</p></div>
-        <div class="detail-total"><span>在庫金額 合計</span><strong id="detail-total">¥0</strong></div>
+        <div class="detail-total"><span>在庫金額 合計</span><strong id="detail-total">¥0</strong><small id="detail-prev-total">前月（6月分）合計 ¥0</small></div>
       </div>
       <div class="detail-meta"><span id="detail-completed-at">棚卸完了日時：未送信</span><span id="detail-status">状態：完了</span></div>
-      <div class="table-card detail-table"><table><thead><tr><th>商品名</th><th>分類</th><th>数量</th><th>仕入単価</th><th>在庫金額</th></tr></thead><tbody id="detail-body"></tbody><tfoot><tr><td colspan="4">合計</td><td id="detail-foot-total">¥0</td></tr></tfoot></table></div>
+      <div class="table-card detail-table"><table><thead><tr><th>商品名</th><th>分類</th><th>数量</th><th>仕入単価</th><th>在庫金額</th></tr></thead><tbody id="detail-body"></tbody><tfoot><tr><td colspan="4">合計</td><td><strong id="detail-foot-total">¥0</strong><small id="detail-foot-prev-total" class="detail-prev-foot">前月（6月分） ¥0</small></td></tr></tfoot></table></div>
       <p class="print-note">Tana ドリンク棚卸｜出力日：2026年7月3日</p>
     </section>
   </div>
@@ -846,6 +849,12 @@ const monthLabel = month => {
   const [year, value] = month.split("-");
   return `${year}年 ${Number(value)}月`;
 };
+const previousMonthOf = month => {
+  const [year, value] = month.split("-").map(Number);
+  const date = new Date(year, value - 2, 1);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+};
+const shortMonthLabel = month => `${Number(month.split("-")[1])}月分`;
 const priceFor = product => completedMonths.includes(currentMonth) && priceSnapshots[currentMonth]?.[product.id] !== undefined
   ? priceSnapshots[currentMonth][product.id]
   : product.price;
@@ -1358,19 +1367,23 @@ function openHqProductDetail(store, id) {
   document.querySelector("#product-detail-modal").classList.remove("hidden");
 }
 
-function getStoreReportRows(storeName) {
+function getStoreReportRows(storeName, month = currentMonth) {
   const storeProducts = storeName === activeStore && activeRole === "store"
     ? products
     : (JSON.parse(localStorage.getItem(storeKey("products", storeName)) || "null") || seedProducts.map(p => ({ ...p })));
-  const quantities = JSON.parse(localStorage.getItem(storeKey("month-quantities", storeName)) || "{}")[currentMonth] || {};
-  const memos = JSON.parse(localStorage.getItem(storeKey("month-memos", storeName)) || "{}")[currentMonth] || {};
-  const memos2 = JSON.parse(localStorage.getItem(storeKey("month-memos-2", storeName)) || "{}")[currentMonth] || {};
-  const exclusions = JSON.parse(localStorage.getItem(storeKey("month-exclusions", storeName)) || "{}")[currentMonth] || [];
-  const prices = JSON.parse(localStorage.getItem(storeKey("month-prices", storeName)) || "{}")[currentMonth] || {};
-  const completed = JSON.parse(localStorage.getItem(storeKey("completed-months", storeName)) || "[]").includes(currentMonth);
+  const allQuantities = JSON.parse(localStorage.getItem(storeKey("month-quantities", storeName)) || "{}");
+  const allMemos = JSON.parse(localStorage.getItem(storeKey("month-memos", storeName)) || "{}");
+  const allMemos2 = JSON.parse(localStorage.getItem(storeKey("month-memos-2", storeName)) || "{}");
+  const quantities = allQuantities[month] || {};
+  const memos = allMemos[month] || {};
+  const memos2 = allMemos2[month] || {};
+  const hasQuantitySnapshot = Object.prototype.hasOwnProperty.call(allQuantities, month);
+  const exclusions = JSON.parse(localStorage.getItem(storeKey("month-exclusions", storeName)) || "{}")[month] || [];
+  const prices = JSON.parse(localStorage.getItem(storeKey("month-prices", storeName)) || "{}")[month] || {};
+  const completed = JSON.parse(localStorage.getItem(storeKey("completed-months", storeName)) || "[]").includes(month);
   return storeProducts.filter(p => !exclusions.includes(p.id)).map(p => ({
     ...p,
-    qty: quantities[p.id] !== undefined ? quantities[p.id] : p.qty,
+    qty: quantities[p.id] !== undefined ? quantities[p.id] : (month === currentMonth && !hasQuantitySnapshot ? p.qty : ""),
     quantityMemo: memos[p.id] || "",
     quantityMemo2: memos2[p.id] || "",
     reportPrice: completed && prices[p.id] !== undefined ? prices[p.id] : p.price
@@ -1381,30 +1394,37 @@ const formatDateTime = iso => iso
   ? new Intl.DateTimeFormat("ja-JP", { year: "numeric", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso))
   : "未送信";
 
-function getStoreCompletionTime(storeName) {
+function getStoreCompletionTime(storeName, month = currentMonth) {
   const times = storeName === activeStore && activeRole === "store"
     ? completionTimestamps
     : JSON.parse(localStorage.getItem(storeKey("completion-times", storeName)) || "{}");
-  return times[currentMonth] || "";
+  return times[month] || "";
 }
+
+const reportTotal = rows => rows.reduce((sum, p) => sum + inventoryAmount(p, p.reportPrice), 0);
 
 function updateHQCompletionTimes() {
   const stores = ["本店", "east", "ASAHI"];
   const rows = document.querySelectorAll("#hq tbody tr");
+  const previousMonth = previousMonthOf(currentMonth);
   let completedCount = 0;
   let grandTotal = 0;
+  let previousGrandTotal = 0;
   rows.forEach((row, index) => {
     const store = stores[index];
     const reportRows = getStoreReportRows(store);
+    const previousRows = getStoreReportRows(store, previousMonth);
     const filled = reportRows.filter(p => p.qty !== "" || p.quantityMemo !== "" || p.quantityMemo2 !== "").length;
-    const total = reportRows.reduce((sum, p) => sum + inventoryAmount(p, p.reportPrice), 0);
+    const total = reportTotal(reportRows);
+    const previousTotal = reportTotal(previousRows);
     const noPrice = missingPriceCount(reportRows);
     const percent = reportRows.length ? Math.round(filled / reportRows.length * 100) : 0;
     const time = getStoreCompletionTime(store);
     if (time) completedCount += 1;
     grandTotal += total;
+    previousGrandTotal += previousTotal;
     row.children[1].innerHTML = `<div class="mini-progress"><span style="width:${percent}%"></span></div> ${filled} / ${reportRows.length}`;
-    row.children[2].textContent = yen(total);
+    row.children[2].innerHTML = `<strong>${yen(total)}</strong><small class="previous-amount">前月（${shortMonthLabel(previousMonth)}） ${yen(previousTotal)}</small>`;
     row.children[3].innerHTML = noPrice ? `<span class="status price-missing">${noPrice}件</span>` : '<span class="status done">0件</span>';
     row.children[4].textContent = formatDateTime(time);
     row.children[5].innerHTML = time
@@ -1414,6 +1434,7 @@ function updateHQCompletionTimes() {
   const cards = document.querySelectorAll("#hq .summary-card");
   cards[0].querySelector("strong").innerHTML = `${completedCount} <small>/ 3店</small>`;
   cards[1].querySelector("strong").textContent = yen(grandTotal);
+  document.querySelector("#hq-summary-prev-month").textContent = `前月（${shortMonthLabel(previousMonth)}）合計 ${yen(previousGrandTotal)}`;
   cards[2].querySelector("strong").innerHTML = `${3 - completedCount} <small>店</small>`;
 }
 
@@ -1445,15 +1466,20 @@ async function refreshHeadOfficeData() {
 function openStoreDetail(storeName) {
   selectedStore = storeName;
   const locationNames = locationNamesFor(storeName);
+  const previousMonth = previousMonthOf(currentMonth);
   const rows = getStoreReportRows(storeName);
+  const previousRows = getStoreReportRows(storeName, previousMonth);
   const rowPrice = p => p.reportPrice;
   const total = rows.reduce((sum, p) => sum + inventoryAmount(p, rowPrice(p)), 0);
+  const previousTotal = previousRows.reduce((sum, p) => sum + inventoryAmount(p, p.reportPrice), 0);
   document.querySelector("#detail-store-name").textContent = storeName;
   document.querySelector("#detail-month").textContent = `${monthLabel(currentMonth)}分`;
   const completedAt = getStoreCompletionTime(storeName);
   document.querySelector("#detail-completed-at").textContent = `棚卸完了日時：${formatDateTime(completedAt)}`;
   document.querySelector("#detail-total").textContent = yen(total);
+  document.querySelector("#detail-prev-total").textContent = `前月（${shortMonthLabel(previousMonth)}）合計 ${yen(previousTotal)}`;
   document.querySelector("#detail-foot-total").textContent = yen(total);
+  document.querySelector("#detail-foot-prev-total").textContent = `前月（${shortMonthLabel(previousMonth)}） ${yen(previousTotal)}`;
   document.querySelector("#detail-status").textContent = `状態：${completedAt ? "完了" : "未送信"}`;
   document.querySelector("#detail-body").innerHTML = rows.map(p => {
     const unitPrice = rowPrice(p);
