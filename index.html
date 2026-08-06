@@ -1381,7 +1381,17 @@ function getStoreReportRows(storeName, month = currentMonth) {
   const exclusions = JSON.parse(localStorage.getItem(storeKey("month-exclusions", storeName)) || "{}")[month] || [];
   const prices = JSON.parse(localStorage.getItem(storeKey("month-prices", storeName)) || "{}")[month] || {};
   const completed = JSON.parse(localStorage.getItem(storeKey("completed-months", storeName)) || "[]").includes(month);
-  return storeProducts.filter(p => !exclusions.includes(p.id)).map(p => ({
+  const savedProductIds = new Set([
+    ...Object.keys(quantities),
+    ...Object.keys(memos),
+    ...Object.keys(memos2),
+    ...Object.keys(prices)
+  ].map(id => Number(id)));
+  const shouldUseSavedProductList = completed || (month !== currentMonth && hasQuantitySnapshot);
+  return storeProducts
+    .filter(p => !exclusions.includes(p.id))
+    .filter(p => !shouldUseSavedProductList || savedProductIds.has(Number(p.id)))
+    .map(p => ({
     ...p,
     qty: quantities[p.id] !== undefined ? quantities[p.id] : (month === currentMonth && !hasQuantitySnapshot ? p.qty : ""),
     quantityMemo: memos[p.id] || "",
